@@ -1,6 +1,0 @@
-.vercel
-node_modules
-dist
-public
-.vscode
-.npmrc 
