@@ -24,13 +24,13 @@
         
         <!-- Botón menú móvil -->
         <div class="flex md:hidden">
-          <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-emerald-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-emerald-400 dark:hover:bg-gray-800 transition-colors duration-200">
+          <button onclick="toggleMobileMenu()" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-emerald-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-emerald-400 dark:hover:bg-gray-800 transition-colors duration-200">
             <span class="sr-only">Abrir menú</span>
             <!-- Iconos de menú -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg id="menu-open-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 close-icon hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg id="menu-close-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
@@ -39,43 +39,63 @@
     </div>
   
     <!-- Menú móvil -->
-    <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-900 shadow-md">
-      <div class="px-2 pt-2 pb-3 space-y-1">
-        <a href="#hero-section" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-emerald-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-emerald-400 dark:hover:bg-gray-800 transition-colors duration-200" data-i18n="home">Inicio</a>
-        <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-emerald-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-emerald-400 dark:hover:bg-gray-800 transition-colors duration-200" data-i18n="about">Sobre mí</a>
-        <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-emerald-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-emerald-400 dark:hover:bg-gray-800 transition-colors duration-200" data-i18n="skills">Habilidades</a>
-        <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-emerald-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-emerald-400 dark:hover:bg-gray-800 transition-colors duration-200" data-i18n="projects">Proyectos</a>
-        <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium bg-emerald-500 hover:bg-emerald-600 text-white hover:text-white transition-colors duration-200" data-i18n="contact">Contacto</a>
+    <div id="mobile-menu" class="md:hidden hidden bg-white dark:bg-gray-900 shadow-lg w-full transition-all duration-200">
+      <div class="px-4 py-3 space-y-2 border-t border-gray-200 dark:border-gray-700">
+        <a href="javascript:void(0)" onclick="navigateToSection('#hero-section')" class="block px-4 py-2 rounded-lg text-base font-medium text-gray-600 hover:text-emerald-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-emerald-400 dark:hover:bg-gray-800 transition-colors duration-200" data-i18n="home">Inicio</a>
+        <a href="javascript:void(0)" onclick="navigateToSection('#about')" class="block px-4 py-2 rounded-lg text-base font-medium text-gray-600 hover:text-emerald-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-emerald-400 dark:hover:bg-gray-800 transition-colors duration-200" data-i18n="about">Sobre mí</a>
+        <a href="javascript:void(0)" onclick="navigateToSection('#skills')" class="block px-4 py-2 rounded-lg text-base font-medium text-gray-600 hover:text-emerald-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-emerald-400 dark:hover:bg-gray-800 transition-colors duration-200" data-i18n="skills">Habilidades</a>
+        <a href="javascript:void(0)" onclick="navigateToSection('#projects')" class="block px-4 py-2 rounded-lg text-base font-medium text-gray-600 hover:text-emerald-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-emerald-400 dark:hover:bg-gray-800 transition-colors duration-200" data-i18n="projects">Proyectos</a>
+        <a href="javascript:void(0)" onclick="navigateToSection('#contact')" class="block px-4 py-2 rounded-lg text-base font-medium bg-emerald-500 hover:bg-emerald-600 text-white hover:text-white transition-colors duration-200 mt-4" data-i18n="contact">Contacto</a>
       </div>
     </div>
   </nav>
   
-  <script>
-    // Funcionalidad para el menú móvil
-    document.addEventListener('DOMContentLoaded', () => {
-      const mobileMenuButton = document.getElementById('mobile-menu-button');
-      const mobileMenu = document.getElementById('mobile-menu');
-      const menuIcon = document.querySelector('.menu-icon');
-      const closeIcon = document.querySelector('.close-icon');
+  <script is:inline>
+    // Función global para alternar el menú móvil
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const openIcon = document.getElementById('menu-open-icon');
+      const closeIcon = document.getElementById('menu-close-icon');
       
-      if (mobileMenuButton && mobileMenu && menuIcon && closeIcon) {
-        mobileMenuButton.addEventListener('click', () => {
-          mobileMenu.classList.toggle('hidden');
-          menuIcon.classList.toggle('hidden');
-          closeIcon.classList.toggle('hidden');
-        });
-        
-        // Cerrar menú al hacer click en un enlace
-        const mobileLinks = mobileMenu.querySelectorAll('a');
-        mobileLinks.forEach(link => {
-          link.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-            menuIcon.classList.remove('hidden');
-            closeIcon.classList.add('hidden');
-          });
-        });
+      if (menu) {
+        menu.classList.toggle('hidden');
+        openIcon.classList.toggle('hidden');
+        closeIcon.classList.toggle('hidden');
+        console.log("Menú móvil toggled");
       }
+    }
+    
+    // Función global para cerrar el menú
+    function closeMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const openIcon = document.getElementById('menu-open-icon');
+      const closeIcon = document.getElementById('menu-close-icon');
       
+      if (menu) {
+        menu.classList.add('hidden');
+        openIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+        console.log("Menú móvil cerrado");
+      }
+    }
+
+    // Función global para navegar a una sección
+    function navigateToSection(sectionId) {
+      closeMenu();
+      
+      setTimeout(() => {
+        const section = document.querySelector(sectionId);
+        if (section) {
+          window.scrollTo({
+            top: section.offsetTop - 70,
+            behavior: 'smooth'
+          });
+        }
+      }, 300);
+    }
+
+    // Inicialización y configuración adicional al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
       // Cambiar estilo del navbar al hacer scroll
       const navbar = document.getElementById('main-nav');
       if (navbar) {
@@ -98,8 +118,8 @@
         let current = '';
         
         sections.forEach(section => {
-          const sectionTop = (section as HTMLElement).offsetTop - 100;
-          const sectionHeight = (section as HTMLElement).offsetHeight;
+          const sectionTop = section.offsetTop - 100;
+          const sectionHeight = section.offsetHeight;
           const sectionId = section.getAttribute('id') || '';
           
           if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
@@ -117,68 +137,32 @@
         });
       });
     });
-    
-    // Toggle de modo oscuro
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
-    
-    // Función para establecer el tema
-    function setTheme(isDark: boolean) {
-      if (isDark) {
-        document.documentElement.classList.add('dark');
-        localStorage.setItem('color-theme', 'dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-        localStorage.setItem('color-theme', 'light');
-      }
-    }
-    
-    // Función para actualizar los íconos del tema
-    function updateThemeIcons(isDark: boolean) {
-      if (themeToggleDarkIcon && themeToggleLightIcon) {
-        if (isDark) {
-          themeToggleDarkIcon.classList.add('hidden');
-          themeToggleLightIcon.classList.remove('hidden');
-        } else {
-          themeToggleDarkIcon.classList.remove('hidden');
-          themeToggleLightIcon.classList.add('hidden');
-        }
-      }
-    }
-    
-    // Inicializar el tema
-    const isDarkMode = localStorage.getItem('color-theme') === 'dark' || 
-      (!localStorage.getItem('color-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
-    
-    setTheme(isDarkMode);
-    updateThemeIcons(isDarkMode);
-    
-    // Toggle del tema oscuro/claro
-    if (themeToggle) {
-      themeToggle.addEventListener('click', () => {
-        const isDark = document.documentElement.classList.contains('dark');
-        setTheme(!isDark);
-        updateThemeIcons(!isDark);
-      });
-    }
-    
-    // Scroll suave para los enlaces de navegación
-    const anchors = document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]');
-    anchors.forEach((anchor) => {
-      anchor.addEventListener('click', function(e: Event) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
-        if (!targetId || targetId === '#') return;
-        
-        const targetElement = document.querySelector(targetId) as HTMLElement;
-        if (targetElement) {
-          window.scrollTo({
-            top: targetElement.offsetTop - 80,
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
   </script>
+
+<style>
+  /* Estilos mejorados para el menú móvil */
+  #mobile-menu {
+    width: 100%;
+    z-index: 50;
+    border-top: 1px solid rgba(229, 231, 235, 0.5);
+  }
+  
+  #mobile-menu.hidden {
+    display: none;
+  }
+  
+  /* Específico para dispositivos táctiles */
+  @media (max-width: 768px) {
+    #mobile-menu a, button {
+      min-height: 50px; /* Mayor área táctil */
+      display: block;
+      width: 100%;
+    }
+    
+    /* Prevenir que la pantalla rebote en iOS pero sin bloquear el scroll */
+    html, body {
+      -webkit-overflow-scrolling: touch;
+      overflow-x: hidden;
+    }
+  }
+</style>
