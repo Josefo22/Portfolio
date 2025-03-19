@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global styles para el sitio web */
+
+/* Reset de padding y margin */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Mejoras de rendimiento para contenido en móviles */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: inherit;
+  position: relative;
+}
+
+/* Secciones principales */
+main {
+  position: relative;
+  width: 100%; 
+  height: auto;
+  min-height: 100vh;
+  overflow: visible;
+  display: block;
+  contain: content;
+}
+
+section {
+  position: relative !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: auto !important;
+  overflow: visible !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  margin-bottom: 0 !important;
+  padding: 2rem 0 !important;
+  z-index: 1 !important;
+}
+
+/* Arreglos para animaciones */
+.animate-float, .animate-bounce-slow, .animate-pulse-slow, .animate-ping-slow {
+  will-change: transform, opacity;
+}
+
+/* Hacer que los botones e inputs sean más fáciles de tocar en móvil */
+button, input, a {
+  touch-action: manipulation;
+}
+
+/* Mejoras para z-index y capas */
+.z-high {
+  z-index: 100;
+}
+
+.z-highest {
+  z-index: 1000;
+}
+
+/* Soporte para dispositivos móviles específicos */
+@media (max-width: 640px) {
+  /* Ajustes para pantallas pequeñas */
+  section {
+    overflow: visible !important;
+    min-height: auto !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    margin-bottom: 2rem !important;
+    padding: 1rem 0 !important;
+    z-index: 1 !important;
+  }
+  
+  /* Hacer que los botones sean más grandes */
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Ajustar tamaños de texto */
+  h1 {
+    font-size: 2.5rem !important;
+  }
+  
+  h2 {
+    font-size: 2rem !important;
+  }
+}
+
+/* Garantizar que las secciones principales sean visibles */
+#about, #skills, #projects, #contact {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  z-index: 1 !important;
+  height: auto !important;
+  min-height: auto !important;
+}
+
+/* Contenedores de sección */
+.section-container {
+  position: relative !important;
+  transform: none !important;
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+/* Prevenir selección de texto en ciertos elementos */
+.no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Estilos para scrollbar - Solo 1 scrollbar */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #10b981 #f3f4f6;
+}
+
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #10b981;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+/* Corregir scrollbars adicionales */
+.fixed {
+  position: fixed;
+  overflow: visible;
+}
+
+/* Evitar overflow en elementos absolutos y fijos */
+.fixed, .absolute {
+  overflow: visible !important;
+}
+

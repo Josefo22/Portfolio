@@ -1,0 +1,139 @@
+---
+// Componente simplificado sin scripts
+---
+
+<div class="fixed bottom-6 right-6 z-50 flex gap-3 overflow-visible">
+  <!-- Selector de tema -->
+  <button
+    id="theme-toggle"
+    class="p-3 text-gray-500 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-lg"
+    aria-label="Cambiar modo"
+    title="Cambiar entre modo claro y oscuro"
+  >
+    <!-- Ícono Sol (se muestra en modo oscuro) -->
+    <svg
+      id="theme-toggle-light-icon"
+      class="w-6 h-6 hidden"
+      fill="currentColor"
+      viewBox="0 0 20 20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+      ></path>
+    </svg>
+    <!-- Ícono Luna (se muestra en modo claro) -->
+    <svg
+      id="theme-toggle-dark-icon"
+      class="w-6 h-6"
+      fill="currentColor"
+      viewBox="0 0 20 20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+    </svg>
+  </button>
+
+  <!-- Selector de idioma -->
+  <div class="relative overflow-visible">
+    <button
+      id="language-toggle"
+      class="p-3 text-gray-500 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 flex items-center gap-2 shadow-lg"
+      aria-label="Change language"
+    >
+      <span id="current-language" class="text-base font-medium">ES</span>
+      <svg
+        class="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M19 9l-7 7-7-7"
+        ></path>
+      </svg>
+    </button>
+
+    <!-- Menú de idiomas -->
+    <div
+      id="language-menu"
+      class="hidden absolute right-0 bottom-full mb-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 transition-all overflow-hidden"
+    >
+      <ul class="py-2">
+        <li>
+          <button
+            data-lang="es"
+            class="language-option w-full text-left px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2"
+          >
+            <span class="flag text-base">🇪🇸</span>
+            <span>Español</span>
+          </button>
+        </li>
+        <li>
+          <button
+            data-lang="en"
+            class="language-option w-full text-left px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2"
+          >
+            <span class="flag text-base">🇺🇸</span>
+            <span>English</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Asegurar que no haya scrollbars adicionales */
+  .fixed {
+    overflow: visible !important;
+  }
+  
+  #language-menu {
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+</style>
+
+<script is:inline>
+  // Script para manejar el cambio de tema
+  document.addEventListener('DOMContentLoaded', function() {
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const darkIcon = document.getElementById('theme-toggle-dark-icon');
+    const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+    // Función para alternar el tema
+    function toggleTheme() {
+      // Si actualmente está en modo oscuro
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('color-theme', 'light');
+        darkIcon.classList.remove('hidden');
+        lightIcon.classList.add('hidden');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('color-theme', 'dark');
+        darkIcon.classList.add('hidden');
+        lightIcon.classList.remove('hidden');
+      }
+    }
+
+    // Configurar estado inicial de los iconos
+    if (document.documentElement.classList.contains('dark')) {
+      darkIcon.classList.add('hidden');
+      lightIcon.classList.remove('hidden');
+    } else {
+      darkIcon.classList.remove('hidden');
+      lightIcon.classList.add('hidden');
+    }
+
+    // Agregar evento al botón de tema
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener('click', toggleTheme);
+    }
+  });
+</script> 

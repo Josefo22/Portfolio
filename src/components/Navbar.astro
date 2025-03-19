@@ -1,0 +1,182 @@
+<!-- Navbar.astro -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm transition-all duration-300" id="main-nav">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo -->
+        <div class="flex-shrink-0 flex items-center">
+          <a href="#" class="text-xl font-bold text-emerald-600 dark:text-emerald-400">
+            <span class="inline-block">JJ</span>
+            <span class="ml-1 text-gray-800 dark:text-white">Dev</span>
+          </a>
+        </div>
+        
+        <!-- Menú versión escritorio -->
+        <div class="hidden md:block">
+          <div class="ml-4 flex items-center space-x-4">
+            <a href="#hero-section" class="nav-link text-gray-600 hover:text-emerald-600 dark:text-gray-300 dark:hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200" data-i18n="home">Inicio</a>
+            <a href="#about" class="nav-link text-gray-600 hover:text-emerald-600 dark:text-gray-300 dark:hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200" data-i18n="about">Sobre mí</a>
+            <a href="#skills" class="nav-link text-gray-600 hover:text-emerald-600 dark:text-gray-300 dark:hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200" data-i18n="skills">Habilidades</a>
+            <a href="#projects" class="nav-link text-gray-600 hover:text-emerald-600 dark:text-gray-300 dark:hover:text-emerald-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200" data-i18n="projects">Proyectos</a>
+            <a href="#contact" class="nav-link bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200" data-i18n="contact">Contacto</a>
+          </div>
+        </div>
+      
+        
+        <!-- Botón menú móvil -->
+        <div class="md:hidden flex items-center">
+          <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+            <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+            <svg id="close-icon" class="hidden w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Menú móvil -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-900 shadow-lg">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="#hero-section" class="mobile-nav-link block text-gray-600 hover:text-emerald-600 dark:text-gray-300 dark:hover:text-emerald-400 px-3 py-2 rounded-md text-base font-medium transition-colors duration-200" data-i18n="home">Inicio</a>
+        <a href="#about" class="mobile-nav-link block text-gray-600 hover:text-emerald-600 dark:text-gray-300 dark:hover:text-emerald-400 px-3 py-2 rounded-md text-base font-medium transition-colors duration-200" data-i18n="about">Sobre mí</a>
+        <a href="#skills" class="mobile-nav-link block text-gray-600 hover:text-emerald-600 dark:text-gray-300 dark:hover:text-emerald-400 px-3 py-2 rounded-md text-base font-medium transition-colors duration-200" data-i18n="skills">Habilidades</a>
+        <a href="#projects" class="mobile-nav-link block text-gray-600 hover:text-emerald-600 dark:text-gray-300 dark:hover:text-emerald-400 px-3 py-2 rounded-md text-base font-medium transition-colors duration-200" data-i18n="projects">Proyectos</a>
+        <a href="#contact" class="mobile-nav-link block bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 mt-4" data-i18n="contact">Contacto</a>
+      </div>
+    </div>
+  </nav>
+  
+  <script>
+    // Funcionalidad para el menú móvil
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    
+    function toggleMobileMenu() {
+      if (mobileMenu && menuIcon && closeIcon) {
+        mobileMenu.classList.toggle('hidden');
+        menuIcon.classList.toggle('hidden');
+        closeIcon.classList.toggle('hidden');
+      }
+    }
+    
+    if (mobileMenuButton) {
+      mobileMenuButton.addEventListener('click', toggleMobileMenu);
+    }
+    
+    // Cerrar el menú móvil al hacer clic en un enlace
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', toggleMobileMenu);
+    });
+    
+    // Toggle de modo oscuro
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    
+    // Función para establecer el tema
+    function setTheme(isDark: boolean) {
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('color-theme', 'dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('color-theme', 'light');
+      }
+    }
+    
+    // Función para actualizar los íconos del tema
+    function updateThemeIcons(isDark: boolean) {
+      if (themeToggleDarkIcon && themeToggleLightIcon) {
+        if (isDark) {
+          themeToggleDarkIcon.classList.add('hidden');
+          themeToggleLightIcon.classList.remove('hidden');
+        } else {
+          themeToggleDarkIcon.classList.remove('hidden');
+          themeToggleLightIcon.classList.add('hidden');
+        }
+      }
+    }
+    
+    // Inicializar el tema
+    const isDarkMode = localStorage.getItem('color-theme') === 'dark' || 
+      (!localStorage.getItem('color-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    
+    setTheme(isDarkMode);
+    updateThemeIcons(isDarkMode);
+    
+    // Toggle del tema oscuro/claro
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.contains('dark');
+        setTheme(!isDark);
+        updateThemeIcons(!isDark);
+      });
+    }
+    
+    // Detector de scroll para cambiar estilo del navbar
+    const navbar = document.getElementById('main-nav');
+    
+    if (navbar) {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 10) {
+          navbar.classList.add('shadow-md', 'py-1');
+        } else {
+          navbar.classList.remove('shadow-md', 'py-1');
+        }
+      });
+    }
+    
+    // Resaltar enlace de navegación activo
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section');
+    
+    function setActiveLink() {
+      let currentSection = '';
+      
+      sections.forEach((section: HTMLElement) => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        const sectionId = section.getAttribute('id');
+        
+        if (window.scrollY >= (sectionTop - 200) && sectionId) {
+          currentSection = sectionId;
+        }
+      });
+      
+      navLinks.forEach(link => {
+        link.classList.remove('text-emerald-600', 'dark:text-emerald-400', 'font-semibold');
+        const href = link.getAttribute('href');
+        
+        if (href === `#${currentSection}`) {
+          link.classList.add('text-emerald-600', 'dark:text-emerald-400', 'font-semibold');
+        }
+      });
+    }
+    
+    window.addEventListener('scroll', setActiveLink);
+    window.addEventListener('load', setActiveLink);
+    
+    // Scroll suave para los enlaces de navegación
+    const anchors = document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]');
+    anchors.forEach((anchor) => {
+      anchor.addEventListener('click', function(e: Event) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (!targetId || targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId) as HTMLElement;
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>

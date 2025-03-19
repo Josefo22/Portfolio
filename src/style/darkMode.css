@@ -1,0 +1,42 @@
+/* darkMode.css */
+html.dark {
+  --background: #1f2937;
+  --text: #f9fafb;
+  --primary: #10b981;
+  --primary-hover: #059669;
+  --surface: #374151;
+  --surface-hover: #4b5563;
+  color-scheme: dark;
+}
+
+html.dark body {
+  background-color: var(--background);
+  color: var(--text);
+}
+
+html.dark .bg-white {
+  background-color: var(--surface);
+}
+
+html.dark .text-gray-800 {
+  color: var(--text);
+}
+
+html.dark .border-gray-200 {
+  border-color: #374151;
+}
+
+/* Mejorar la visualización de tarjetas y elementos UI en modo oscuro */
+html.dark .shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+}
+
+/* Efecto hover para tarjetas en modo oscuro */
+html.dark .hover\:shadow-xl:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+}
+
+/* Transición suave para todos los cambios */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+} 

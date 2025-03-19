@@ -1,0 +1,285 @@
+---
+// AboutSection.astro
+import { Icon } from 'astro-icon/components';
+---
+
+<section id="about" class="py-20 bg-gray-50 dark:bg-gray-900 relative overflow-hidden">
+  <!-- Elementos decorativos de fondo -->
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute -top-40 -right-40 w-80 h-80 bg-emerald-500 rounded-full opacity-10 blur-3xl"></div>
+    <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500 rounded-full opacity-10 blur-3xl"></div>
+    <div class="absolute top-1/4 left-1/3 w-40 h-40 bg-yellow-400 rounded-full opacity-5 blur-2xl"></div>
+    <div class="absolute bottom-1/4 right-1/3 w-60 h-60 bg-purple-500 rounded-full opacity-5 blur-2xl"></div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <!-- Título con animación -->
+    <div class="text-center mb-16 overflow-hidden">
+      <h2 class="text-4xl font-bold text-gray-800 dark:text-white opacity-0 animate-slide-up" data-i18n="about-title">
+        Sobre Mí
+      </h2>
+      <div class="w-24 h-1 bg-emerald-500 mx-auto mt-4 opacity-0 animate-fade-in-delay"></div>
+    </div>
+    
+    <div class="grid gap-8">
+      <!-- Contenido principal -->
+      <div class="space-y-6 opacity-0 animate-fade-in-delay">
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg transform hover:scale-105 transition-transform duration-300 border-l-4 border-emerald-500">
+          <h3 class="text-2xl font-semibold mb-4 text-gray-800 dark:text-white flex items-center" data-i18n="about-greeting">
+            <Icon name="mdi:account" class="w-6 h-6 mr-3 text-emerald-500" />
+            ¡Hola! Soy Juan José
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed" data-i18n="about-description">
+            Como desarrollador Fullstack, me especializo en crear soluciones digitales completas
+            que combinan diseño atractivo con código limpio y eficiente. Mi enfoque está en desarrollar
+            aplicaciones que no solo se vean bien, sino que también ofrezcan experiencias de usuario
+            excepcionales y escalabilidad para crecer con tu negocio.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg transform hover:scale-105 transition-transform duration-300 border-t-2 border-emerald-500 group">
+            <h4 class="font-semibold text-gray-800 dark:text-white mb-3 flex items-center" data-i18n="education">
+              <Icon name="mdi:school" class="w-5 h-5 mr-2 text-emerald-500 group-hover:rotate-12 transition-transform duration-300" />
+              Educación
+            </h4>
+            <p class="text-gray-600 dark:text-gray-300" data-i18n="education-degree">Ingeniería Informatica</p>
+            <p class="text-gray-500 dark:text-gray-400 text-sm" data-i18n="education-school">Institucion Universitaria de Envigado</p>
+          </div>
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg transform hover:scale-105 transition-transform duration-300 border-t-2 border-blue-500 group">
+            <h4 class="font-semibold text-gray-800 dark:text-white mb-3 flex items-center" data-i18n="location-title">
+              <Icon name="mdi:map-marker" class="w-5 h-5 mr-2 text-blue-500 group-hover:bounce-animation transition-transform duration-300" />
+              Ubicación
+            </h4>
+            <p class="text-gray-600 dark:text-gray-300" data-i18n="location-city">Envigado, Colombia</p>
+            <p class="text-gray-500 dark:text-gray-400 text-sm" data-i18n="location-remote">Disponible para trabajo remoto</p>
+          </div>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg transform hover:scale-105 transition-transform duration-300 border-t-2 border-purple-500 group">
+            <h4 class="font-semibold text-gray-800 dark:text-white mb-3 flex items-center" data-i18n="experience">
+              <Icon name="mdi:briefcase" class="w-5 h-5 mr-2 text-purple-500 group-hover:pulse-animation transition-transform duration-300" />
+              Experiencia
+            </h4>
+            <p class="text-gray-600 dark:text-gray-300" data-i18n="experience-years">2+ años en desarrollo web y móvil</p>
+            <p class="text-gray-500 dark:text-gray-400 text-sm" data-i18n="experience-skills">Frontend, Backend y Diseño UI/UX</p>
+          </div>
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg transform hover:scale-105 transition-transform duration-300 border-t-2 border-yellow-500 group">
+            <h4 class="font-semibold text-gray-800 dark:text-white mb-3 flex items-center" data-i18n="specialties">
+              <Icon name="mdi:lightbulb" class="w-5 h-5 mr-2 text-yellow-500 group-hover:shine-animation transition-transform duration-300" />
+              Especialidades
+            </h4>
+            <p class="text-gray-600 dark:text-gray-300" data-i18n="specialties-tech">React, Node.js, UI/UX, Astro, TailwindCSS</p>
+            <p class="text-gray-500 dark:text-gray-400 text-sm" data-i18n="specialties-focus">Soluciones web modernas y responsivas</p>
+          </div>
+        </div>
+        
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a href="/cv.pdf" target="_blank" class="group relative inline-flex items-center justify-center px-6 py-3 overflow-hidden font-medium bg-emerald-500 text-white rounded-lg shadow-md transition-all duration-300 ease-out hover:bg-emerald-600">
+            <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 translate-x-full group-hover:translate-x-0 ease">
+              <Icon name="mdi:download" class="w-5 h-5" />
+            </span>
+            <span class="absolute flex items-center justify-center w-full h-full text-white transition-all duration-300 transform group-hover:-translate-x-full ease" data-i18n="download-cv">Descargar CV</span>
+            <span class="relative invisible" data-i18n="download-cv">Descargar CV</span>
+          </a>
+          <a href="#contact" class="inline-flex items-center justify-center px-6 py-3 font-medium text-emerald-500 bg-transparent border-2 border-emerald-500 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-colors duration-300">
+            <Icon name="mdi:email" class="w-5 h-5 mr-2" />
+            <span data-i18n="contact">Contactarme</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Contador de estadísticas -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 mb-4">
+      <div class="text-center bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg transform hover:scale-105 transition-transform duration-300 opacity-0 animate-fade-in-delay-2 relative overflow-hidden group border-b-2 border-emerald-500">
+        <div class="absolute inset-0 bg-emerald-500 opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
+        <Icon name="mdi:check-circle" class="w-10 h-10 mx-auto mb-3 text-emerald-500 group-hover:bounce-animation" />
+        <div class="text-4xl font-bold text-emerald-500 mb-2" data-count="40">0</div>
+        <p class="text-gray-600 dark:text-gray-300" data-i18n="stats-projects">Proyectos completados</p>
+      </div>
+      <div class="text-center bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg transform hover:scale-105 transition-transform duration-300 opacity-0 animate-fade-in-delay-2 relative overflow-hidden group border-b-2 border-blue-500">
+        <div class="absolute inset-0 bg-blue-500 opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
+        <Icon name="mdi:account-group" class="w-10 h-10 mx-auto mb-3 text-blue-500 group-hover:pulse-animation" />
+        <div class="text-4xl font-bold text-blue-500 mb-2" data-count="22">0</div>
+        <p class="text-gray-600 dark:text-gray-300" data-i18n="stats-clients">Clientes satisfechos</p>
+      </div>
+      <div class="text-center bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg transform hover:scale-105 transition-transform duration-300 opacity-0 animate-fade-in-delay-2 relative overflow-hidden group border-b-2 border-purple-500">
+        <div class="absolute inset-0 bg-purple-500 opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
+        <Icon name="mdi:calendar-clock" class="w-10 h-10 mx-auto mb-3 text-purple-500 group-hover:swing-animation" />
+        <div class="text-4xl font-bold text-purple-500 mb-2" data-count="2">0</div>
+        <p class="text-gray-600 dark:text-gray-300" data-i18n="stats-experience">Años de experiencia</p>
+      </div>
+      <div class="text-center bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg transform hover:scale-105 transition-transform duration-300 opacity-0 animate-fade-in-delay-2 relative overflow-hidden group border-b-2 border-yellow-500">
+        <div class="absolute inset-0 bg-yellow-500 opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
+        <Icon name="mdi:coffee" class="w-10 h-10 mx-auto mb-3 text-yellow-500 group-hover:shake-animation" />
+        <div class="text-4xl font-bold text-yellow-500 mb-2" data-count="444">0</div>
+        <p class="text-gray-600 dark:text-gray-300" data-i18n="stats-coffee">Tazas de café</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Animación de contadores
+  function animateCounter(element: HTMLElement) {
+    const target = parseInt(element.getAttribute('data-count') || '0');
+    const duration = 2000; // 2 segundos
+    const step = target / (duration / 16); // 60fps
+    let current = 0;
+
+    const updateCounter = () => {
+      current += step;
+      if (current < target) {
+        element.textContent = Math.floor(current).toString();
+        requestAnimationFrame(updateCounter);
+      } else {
+        element.textContent = target.toString();
+      }
+    };
+
+    updateCounter();
+  }
+
+  // Iniciar animación cuando el elemento sea visible
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const counters = entry.target.querySelectorAll<HTMLElement>('[data-count]');
+        counters.forEach(counter => animateCounter(counter));
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  const statsSection = document.querySelector<HTMLElement>('.grid-cols-2.md\\:grid-cols-4');
+  if (statsSection) {
+    observer.observe(statsSection);
+  }
+
+  // Iniciar animaciones cuando los elementos sean visibles
+  const animationObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        animationObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll<HTMLElement>('.animate-fade-in, .animate-fade-in-delay, .animate-fade-in-delay-2, .animate-slide-up').forEach(elem => {
+    animationObserver.observe(elem);
+  });
+</script>
+
+<style>
+  /* Animaciones compartidas con HeroSection */
+  .animate-fade-in {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-in-out forwards;
+  }
+  
+  .animate-fade-in-delay {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-in-out forwards;
+    animation-delay: 0.4s;
+  }
+  
+  .animate-fade-in-delay-2 {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-in-out forwards;
+    animation-delay: 0.6s;
+  }
+  
+  .animate-slide-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUp 0.8s ease-out forwards;
+    animation-delay: 0.2s;
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  /* Animaciones adicionales para los iconos */
+  .bounce-animation {
+    animation: bounce 3s ease-in-out infinite;
+  }
+  
+  .pulse-animation {
+    animation: pulse 3s ease-in-out infinite;
+  }
+  
+  .swing-animation {
+    animation: swing 3s ease-in-out infinite;
+  }
+  
+  .shake-animation {
+    animation: shake 3s ease-in-out infinite;
+  }
+  
+  .shine-animation {
+    animation: shine 3s ease-in-out infinite;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 0.8;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+  }
+  
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  @keyframes swing {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(5deg); }
+    75% { transform: rotate(-5deg); }
+  }
+  
+  @keyframes shake {
+    0%, 50%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
+  
+  @keyframes shine {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.3); }
+  }
+</style>

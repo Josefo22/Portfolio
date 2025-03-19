@@ -1,0 +1,179 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import "../style/global.css";
+import "../style/darkMode.css";
+
+// Componentes
+import HeroSection from '../components/HeroSection.astro';
+import ProjectsSection from '../components/ProjectsSection.astro';
+import SkillsSection from '../components/SkillsSection.astro';
+import AboutSection from '../components/AboutSection.astro';
+import ContactSection from '../components/ContactSection.astro';
+import Navbar from '../components/Navbar.astro';
+import ThemeLanguageSelector from '../components/ThemeLanguageSelector.astro';
+import ClientScripts from '../components/ClientScripts.astro';
+
+// No importar el script aquí, usarlo con client:load
+---
+
+<Layout title="Portafolio | Desarrollador Full Stack">
+  <Navbar />
+  
+  <main class="w-full bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <!-- Hero Section con animación de texto -->
+    <section id="hero-section" class="section-container w-full">
+      <HeroSection />
+    </section>
+   
+    <!-- Sección Sobre Mí -->
+    <section id="about" class="section-container w-full">
+      <AboutSection />
+    </section>
+
+    <!-- Sección de Habilidades -->
+    <section id="skills" class="section-container w-full">
+      <SkillsSection />
+    </section>
+    
+    <!-- Sección de Proyectos -->
+    <section id="projects" class="section-container w-full">
+      <ProjectsSection />
+    </section>
+    
+    <!-- Sección de Contacto -->
+    <section id="contact" class="section-container w-full">
+      <ContactSection />
+    </section>
+  </main>
+  
+  <!-- Selector de tema y lenguaje -->
+  <ThemeLanguageSelector />
+  
+  <!-- Scripts del cliente (cargados al final) -->
+  <ClientScripts />
+  
+  <script is:inline>
+    // Asegurar que todas las secciones sean visibles
+    document.addEventListener('DOMContentLoaded', function() {
+      const sections = ['skills', 'projects', 'contact'];
+      sections.forEach(id => {
+        const section = document.getElementById(id);
+        if (section) {
+          section.style.display = 'block';
+          section.style.visibility = 'visible';
+          section.style.opacity = '1';
+          console.log(`Sección #${id} configurada como visible`);
+        } else {
+          console.warn(`Sección #${id} no encontrada`);
+        }
+      });
+      
+      // Aplicar modo oscuro
+      document.documentElement.classList.add('dark');
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('color-theme', 'dark');
+      }
+      
+      // Actualizar íconos de tema
+      const darkIcon = document.getElementById('theme-toggle-dark-icon');
+      const lightIcon = document.getElementById('theme-toggle-light-icon');
+      if (darkIcon && lightIcon) {
+        darkIcon.classList.add('hidden');
+        lightIcon.classList.remove('hidden');
+      }
+      
+      // Eliminar scrollbars adicionales
+      document.body.style.overflow = 'auto';
+      document.documentElement.style.overflow = 'hidden auto';
+      
+      // Buscar y corregir elementos con overflow que puedan causar scrollbars adicionales
+      const containers = document.querySelectorAll('main, .container, section');
+      containers.forEach(el => {
+        if (el) {
+          el.style.overflow = 'visible';
+        }
+      });
+    });
+  </script>
+</Layout>
+
+<style>
+  /* Estilos para el modo oscuro */
+  :root {
+    --background-light: #f9fafb;
+    --text-light: #111827;
+    --background-dark: #1f2937;
+    --text-dark: #f9fafb;
+    --primary: #10b981; /* Color principal (emerald-500) */
+    --primary-dark: #059669; /* emerald-600 */
+    --primary-light: #34d399; /* emerald-400 */
+    --shadow-color: rgba(0, 0, 0, 0.05);
+    --shadow-color-dark: rgba(0, 0, 0, 0.2);
+  }
+
+  .dark {
+    color-scheme: dark;
+  }
+  
+  /* Asegurar que las secciones sean visibles */
+  .section-container {
+    display: block !important;
+    width: 100% !important;
+    overflow: visible !important;
+    position: relative !important;
+    height: auto !important;
+    min-height: auto !important;
+    z-index: 1 !important;
+  }
+
+  @supports (-webkit-touch-callout: none) {
+    .ios-momentum-scroll {
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+
+  /* Transiciones suaves para cambios de tema */
+  @media not all and (min-resolution:.001dpcm) { 
+    @supports (-webkit-appearance:none) {
+      *, *::before, *::after {
+        transition-duration: 0.1s !important;
+      }
+    }
+  }
+  
+  /* Específico para móviles */
+  @media (max-width: 768px) {
+    #skills, #projects, #contact {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      height: auto !important;
+      min-height: auto !important;
+      z-index: 1 !important;
+    }
+    
+    section {
+      margin-bottom: 2rem;
+    }
+  }
+  
+  /* Forzar un único scrollbar */
+  html, body {
+    overflow-x: hidden;
+  }
+  
+  html {
+    overflow-y: auto;
+  }
+  
+  body {
+    overflow-y: visible;
+  }
+  
+  /* Contenedores principales sin overflow */
+  main, section, .container {
+    overflow: visible !important;
+  }
+</style>
+
