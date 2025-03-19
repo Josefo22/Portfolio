@@ -73,7 +73,61 @@ import ClientScripts from '../components/ClientScripts.astro';
           'download-cv': 'Descargar CV',
           'about-title': 'Sobre Mí',
           'skills-title': 'Mis Habilidades',
-          'projects-title': 'Proyectos Destacados'
+          'projects-title': 'Proyectos Destacados',
+          'view-project': 'Ver Proyecto',
+          'source-code': 'Código Fuente',
+          'all-projects': 'Ver Todos',
+          'form-name': 'Nombre',
+          'form-email': 'Correo Electrónico',
+          'form-message': 'Mensaje',
+          'form-submit': 'Enviar Mensaje',
+          'frontend': 'Frontend',
+          'backend': 'Backend',
+          'tools': 'Herramientas',
+          'frameworks': 'Frameworks',
+          'portfolio': 'Portfolio',
+          'projects-description': 'Explora algunos de mis proyectos recientes. Cada proyecto es único y resuelve problemas específicos de negocio utilizando las tecnologías más adecuadas.',
+          'view-all-projects': 'Ver todos los proyectos',
+          'skills-description': 'Herramientas y tecnologías con las que he trabajado para crear soluciones digitales eficientes e innovadoras.',
+          'about-greeting': '¡Hola! Soy Juan José',
+          'about-description': 'Como desarrollador Fullstack, me especializo en crear soluciones digitales completas que combinan diseño atractivo con código limpio y eficiente. Mi enfoque está en desarrollar aplicaciones que no solo se vean bien, sino que también ofrezcan experiencias de usuario excepcionales y escalabilidad para crecer con tu negocio.',
+          'education': 'Educación',
+          'education-degree': 'Ingeniería Informatica',
+          'education-school': 'Institucion Universitaria de Envigado',
+          'location-title': 'Ubicación',
+          'location-city': 'Envigado, Colombia',
+          'location-remote': 'Disponible para trabajo remoto',
+          'experience': 'Experiencia',
+          'experience-years': '2+ años en desarrollo web y móvil',
+          'experience-skills': 'Frontend, Backend y Diseño UI/UX',
+          'specialties': 'Especialidades',
+          'specialties-tech': 'React, Node.js, UI/UX, Astro, TailwindCSS',
+          'specialties-focus': 'Soluciones web modernas y responsivas',
+          'stats-projects': 'Proyectos completados',
+          'stats-clients': 'Clientes satisfechos',
+          'stats-experience': 'Años de experiencia',
+          'stats-coffee': 'Tazas de café',
+          'contact-title': 'Contáctame',
+          'contact-description': '¿Tienes un proyecto en mente? ¡Hablemos sobre cómo puedo ayudarte a hacerlo realidad! Estoy disponible para trabajos freelance, colaboraciones o simplemente para charlar sobre tecnología.',
+          'contact-info': 'Información de Contacto',
+          'email-label': 'Email',
+          'phone': 'Teléfono',
+          'location-title': 'Ubicación',
+          'follow-me': 'Sígueme',
+          'send-message': 'Envíame un mensaje',
+          'subject': 'Asunto',
+          'pos-system-title': 'Sistema POS',
+          'hotel-system-title': 'Sistema de Hotel',
+          'parking-crud-title': 'CRUD de Parqueadero',
+          'ecommerce-title': 'Plataforma E-commerce',
+          'dashboard-title': 'Dashboard Analítico',
+          'management-app-title': 'App de Gestión',
+          'pos-system-description': 'Sistema de punto de venta con gestión de inventario, ventas e informes.',
+          'hotel-system-description': 'Aplicación para gestión de reservas, pagos y clientes de hotel.',
+          'parking-crud-description': 'Sistema para administración de parqueaderos con registro y pagos de vehículos.',
+          'ecommerce-description': 'Plataforma completa con carrito de compras, pagos y panel administrativo.',
+          'dashboard-description': 'Dashboard interactivo para visualización de datos empresariales en tiempo real.',
+          'management-app-description': 'Aplicación para gestión de recursos y proyectos empresariales.'
         },
         'en': {
           'home': 'Home',
@@ -89,9 +143,66 @@ import ClientScripts from '../components/ClientScripts.astro';
           'download-cv': 'Download CV',
           'about-title': 'About Me',
           'skills-title': 'My Skills',
-          'projects-title': 'Featured Projects'
+          'projects-title': 'Featured Projects',
+          'view-project': 'View Project',
+          'source-code': 'Source Code',
+          'all-projects': 'View All',
+          'form-name': 'Name',
+          'form-email': 'Email',
+          'form-message': 'Message',
+          'form-submit': 'Send Message',
+          'frontend': 'Frontend',
+          'backend': 'Backend',
+          'tools': 'Tools',
+          'frameworks': 'Frameworks',
+          'portfolio': 'Portfolio',
+          'projects-description': 'Explore some of my recent projects. Each project is unique and solves specific business problems using the most appropriate technologies.',
+          'view-all-projects': 'View all projects',
+          'skills-description': 'Tools and technologies I have worked with to create efficient and innovative digital solutions.',
+          'about-greeting': 'Hello! I am Juan José',
+          'about-description': 'As a Fullstack developer, I specialize in creating complete digital solutions that combine attractive design with clean and efficient code. My focus is on developing applications that not only look good, but also offer exceptional user experiences and scalability to grow with your business.',
+          'education': 'Education',
+          'education-degree': 'Computer Engineering',
+          'education-school': 'Institucion Universitaria de Envigado',
+          'location-title': 'Location',
+          'location-city': 'Envigado, Colombia',
+          'location-remote': 'Available for remote work',
+          'experience': 'Experience',
+          'experience-years': '2+ years in web and mobile development',
+          'experience-skills': 'Frontend, Backend and UI/UX Design',
+          'specialties': 'Specialties',
+          'specialties-tech': 'React, Node.js, UI/UX, Astro, TailwindCSS',
+          'specialties-focus': 'Modern and responsive web solutions',
+          'stats-projects': 'Completed projects',
+          'stats-clients': 'Satisfied clients',
+          'stats-experience': 'Years of experience',
+          'stats-coffee': 'Cups of coffee',
+          'contact-title': 'Contact Me',
+          'contact-description': 'Do you have a project in mind? Let\'s talk about how I can help you make it happen! I am available for freelance work, collaborations or just to chat about technology.',
+          'contact-info': 'Contact Information',
+          'email-label': 'Email',
+          'phone': 'Phone',
+          'location-title': 'Location',
+          'follow-me': 'Follow Me',
+          'send-message': 'Send Me a Message',
+          'subject': 'Subject',
+          'pos-system-title': 'POS System',
+          'hotel-system-title': 'Hotel System',
+          'parking-crud-title': 'Parking CRUD',
+          'ecommerce-title': 'E-commerce Platform',
+          'dashboard-title': 'Analytics Dashboard',
+          'management-app-title': 'Management App',
+          'pos-system-description': 'Point of sale system with inventory management, sales and reports.',
+          'hotel-system-description': 'Application for managing hotel reservations, payments and customers.',
+          'parking-crud-description': 'System for parking management with vehicle registration and payments.',
+          'ecommerce-description': 'Complete platform with shopping cart, payments and admin panel.',
+          'dashboard-description': 'Interactive dashboard for real-time business data visualization.',
+          'management-app-description': 'Application for business resource and project management.'
         }
       };
+      
+      // Hacer las traducciones disponibles globalmente
+      window.translations = translations;
       
       // Guardar preferencia
       localStorage.setItem('language', lang);
@@ -101,10 +212,41 @@ import ClientScripts from '../components/ClientScripts.astro';
       document.querySelectorAll('[data-i18n]').forEach(function(element) {
         const key = element.getAttribute('data-i18n');
         if (key && translations[lang] && translations[lang][key]) {
-          element.textContent = translations[lang][key];
+          // No actualizar el texto del botón de idioma desde aquí
+          if (element.id !== 'current-lang') {
+            element.textContent = translations[lang][key];
+          }
         }
       });
       
+      // Buscar todos los atributos placeholder con data-i18n-placeholder
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(function(element) {
+        const key = element.getAttribute('data-i18n-placeholder');
+        if (key && translations[lang] && translations[lang][key]) {
+          element.setAttribute('placeholder', translations[lang][key]);
+        }
+      });
+      
+      // Actualizar el selector de idioma
+      const langBtn = document.getElementById('current-lang');
+      if (langBtn) {
+        langBtn.textContent = lang.toUpperCase();
+      }
+
+      // Emitir evento para componentes que necesiten saber que cambió el idioma
+      document.dispatchEvent(new CustomEvent('language-changed', {
+        detail: { language: lang }
+      }));
+      
+      // Aplicar la traducción también a elementos específicos que podrían no tener data-i18n
+      const specificElements = {
+        // Agregar aquí elementos específicos que necesiten traducción personalizada
+        // Ejemplo: document.querySelector('.navbar-brand').textContent = translations[lang]['brand-name'];
+      };
+      
+      // Actualizar meta tags, titles, etc.
+      document.title = lang === 'es' ? 'Portfolio de Juan José - Desarrollador Fullstack' : 'Juan José\'s Portfolio - Fullstack Developer';
+
       console.log('Idioma cambiado exitosamente a ' + lang);
     };
 
@@ -142,28 +284,34 @@ import ClientScripts from '../components/ClientScripts.astro';
       if (window.changeLanguage) {
         window.changeLanguage(storedLang);
       }
+      
+      // Aplicar tema según preferencia guardada
+      const storedTheme = localStorage.getItem('color-theme');
+      
+      if (storedTheme === 'dark' || 
+         (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      
+      // Actualizar los iconos del tema
+      const darkIcon = document.getElementById('dark-icon');
+      const lightIcon = document.getElementById('light-icon');
+      
+      if (darkIcon && lightIcon) {
+        if (document.documentElement.classList.contains('dark')) {
+          darkIcon.classList.add('hidden');
+          lightIcon.classList.remove('hidden');
+        } else {
+          darkIcon.classList.remove('hidden');
+          lightIcon.classList.add('hidden');
+        }
+      }
     });
     
     // Como medida adicional, ejecutar también después de un tiempo
     setTimeout(ensureComponentsVisible, 1000);
-
-    // Aplicar modo oscuro
-    document.documentElement.classList.add('dark');
-    if (typeof localStorage !== 'undefined') {
-      localStorage.setItem('color-theme', 'dark');
-    }
-    
-    // Actualizar íconos de tema
-    const darkIcon = document.getElementById('theme-toggle-dark-icon');
-    const lightIcon = document.getElementById('theme-toggle-light-icon');
-    if (darkIcon && lightIcon) {
-      darkIcon.classList.add('hidden');
-      lightIcon.classList.remove('hidden');
-    }
-    
-    // Eliminar scrollbars adicionales
-    document.body.style.overflow = 'auto';
-    document.documentElement.style.overflow = 'hidden auto';
   </script>
 </Layout>
 

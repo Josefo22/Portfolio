@@ -16,6 +16,7 @@
     "astro-icon": "^1.1.5",
     "framer-motion": "^12.5.0",
     "gsap": "^3.12.0",
+    "portfolio": "file:",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

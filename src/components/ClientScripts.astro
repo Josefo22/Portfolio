@@ -13,9 +13,48 @@
     // Escuchar eventos de cambio de idioma
     window.addEventListener('language-changed', (e) => {
       console.log('Idioma cambiado a:', e.detail.language);
-      // Aquí podemos ejecutar código adicional cuando cambia el idioma
+      
+      // Aplicar cambios adicionales cuando cambia el idioma
+      applyLanguageSpecificChanges(e.detail.language);
     });
   });
+
+  // Función para aplicar cambios específicos cuando cambia el idioma
+  function applyLanguageSpecificChanges(lang) {
+    try {
+      // Asegurar que los placeholders se actualicen
+      document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(element => {
+        const key = element.getAttribute('data-i18n-placeholder');
+        if (key && window.translations && window.translations[lang] && window.translations[lang][key]) {
+          element.setAttribute('placeholder', window.translations[lang][key]);
+        }
+      });
+      
+      // Verificar elementos que podrían no tener data-i18n pero necesitan ser actualizados
+      // Por ejemplo, botones de envío, texto dinámico, etc.
+      document.querySelectorAll('button[type="submit"], .submit-btn').forEach(element => {
+        const submitText = element.querySelector('[data-i18n="form-submit"]');
+        if (!submitText && window.translations && window.translations[lang] && window.translations[lang]['form-submit']) {
+          element.textContent = window.translations[lang]['form-submit'];
+        }
+      });
+      
+      // Forzar una revisión de todos los elementos con data-i18n
+      document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (key && window.translations && window.translations[lang] && window.translations[lang][key]) {
+          // Solo cambiar el texto si no se ha actualizado ya
+          if (element.textContent !== window.translations[lang][key]) {
+            element.textContent = window.translations[lang][key];
+          }
+        }
+      });
+      
+      console.log('Cambios adicionales de idioma aplicados para:', lang);
+    } catch (e) {
+      console.error('Error al aplicar cambios específicos de idioma:', e);
+    }
+  }
 
   // Función para manejar animaciones y visibilidad
   function setupAnimations() {

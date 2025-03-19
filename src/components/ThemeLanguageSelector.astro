@@ -6,6 +6,7 @@
   <!-- Tema -->
   <button 
     id="theme-btn"
+    onclick="toggleTheme()"
     class="flex items-center justify-center w-10 h-10 text-gray-500 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:text-emerald-500 dark:hover:text-emerald-400 focus:outline-none transition-colors duration-300"
   >
     <!-- Sol (modo claro) -->
@@ -27,24 +28,14 @@
     </svg>
   </button>
   
-  <!-- Selector de idioma -->
-  <div class="flex flex-col items-center space-y-2">
-    <button
-      id="spanish-btn" 
-      onclick="document.dispatchEvent(new CustomEvent('change-language', {detail: 'es'}))"
-      class="flex items-center justify-center w-10 h-10 text-gray-500 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:text-emerald-500 dark:hover:text-emerald-400 focus:outline-none transition-colors duration-300"
-    >
-      <span class="text-sm font-medium">ES</span>
-    </button>
-    
-    <button
-      id="english-btn" 
-      onclick="document.dispatchEvent(new CustomEvent('change-language', {detail: 'en'}))"
-      class="flex items-center justify-center w-10 h-10 text-gray-500 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:text-emerald-500 dark:hover:text-emerald-400 focus:outline-none transition-colors duration-300"
-    >
-      <span class="text-sm font-medium">EN</span>
-    </button>
-  </div>
+  <!-- Selector de idioma (un solo botón) -->
+  <button
+    id="language-btn" 
+    onclick="toggleLanguage()"
+    class="flex items-center justify-center w-10 h-10 text-gray-500 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:text-emerald-500 dark:hover:text-emerald-400 focus:outline-none transition-colors duration-300"
+  >
+    <span id="current-lang" class="text-sm font-medium">ES</span>
+  </button>
 </div>
 
 <style>
@@ -55,40 +46,100 @@
 </style>
 
 <script is:inline>
-  // Inicializar tema al cargar
-  document.addEventListener('DOMContentLoaded', function() {
-    // Toggle de tema
-    const themeBtn = document.getElementById('theme-btn');
+  // Funciones globales para cambiar tema e idioma
+  function toggleTheme() {
+    const isDark = document.documentElement.classList.contains('dark');
     const darkIcon = document.getElementById('dark-icon');
     const lightIcon = document.getElementById('light-icon');
     
-    themeBtn.addEventListener('click', function() {
-      const isDark = document.documentElement.classList.contains('dark');
-      
-      if (isDark) {
-        document.documentElement.classList.remove('dark');
-        darkIcon.classList.remove('hidden');
-        lightIcon.classList.add('hidden');
-        localStorage.setItem('color-theme', 'light');
-      } else {
-        document.documentElement.classList.add('dark');
-        darkIcon.classList.add('hidden');
-        lightIcon.classList.remove('hidden');
-        localStorage.setItem('color-theme', 'dark');
-      }
-    });
-  });
+    if (isDark) {
+      document.documentElement.classList.remove('dark');
+      darkIcon.classList.remove('hidden');
+      lightIcon.classList.add('hidden');
+      localStorage.setItem('color-theme', 'light');
+    } else {
+      document.documentElement.classList.add('dark');
+      darkIcon.classList.add('hidden');
+      lightIcon.classList.remove('hidden');
+      localStorage.setItem('color-theme', 'dark');
+    }
+  }
   
-  // Manejar evento de cambio de idioma
-  document.addEventListener('change-language', function(e) {
-    const lang = e.detail;
-    console.log('Evento change-language recibido:', lang);
+  function toggleLanguage() {
+    // Obtener el idioma actual y determinar el nuevo
+    const currentLanguage = localStorage.getItem('language') || 'es';
+    const newLanguage = currentLanguage === 'es' ? 'en' : 'es';
     
-    // Llamar a la función global si existe
+    console.log('Cambiando idioma de', currentLanguage, 'a', newLanguage);
+    
+    // Guardar el nuevo idioma en localStorage
+    localStorage.setItem('language', newLanguage);
+    
+    // Actualizar directamente el texto del botón
+    const langButton = document.getElementById('current-lang');
+    if (langButton) {
+      langButton.textContent = newLanguage.toUpperCase();
+    }
+    
+    // Llamar a la función global de cambio de idioma si existe
     if (typeof window.changeLanguage === 'function') {
-      window.changeLanguage(lang);
+      window.changeLanguage(newLanguage);
     } else {
       console.error('La función changeLanguage no está disponible');
     }
+    
+    // Forzar la actualización de la página para asegurar que todos los elementos se actualicen
+    location.reload();
+  }
+  
+  // Función para aplicar idioma a elementos específicos que podrían no actualizarse automáticamente
+  function applyLanguageToElements(lang) {
+    // Actualizar placeholders
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function(element) {
+      const key = element.getAttribute('data-i18n-placeholder');
+      if (key && window.translations && window.translations[lang] && window.translations[lang][key]) {
+        element.setAttribute('placeholder', window.translations[lang][key]);
+      }
+    });
+    
+    // Asegurar que los botones y elementos de formulario estén traducidos
+    document.querySelectorAll('button, input[type="submit"]').forEach(function(element) {
+      const key = element.getAttribute('data-i18n');
+      if (key && window.translations && window.translations[lang] && window.translations[lang][key]) {
+        if (element.tagName === 'INPUT') {
+          element.value = window.translations[lang][key];
+        } else {
+          const textNode = Array.from(element.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
+          if (textNode) {
+            textNode.nodeValue = window.translations[lang][key];
+          }
+        }
+      }
+    });
+  }
+  
+  // Inicializar al cargar la página
+  document.addEventListener('DOMContentLoaded', function() {
+    // Establecer el texto del botón de idioma según el valor guardado
+    const storedLang = localStorage.getItem('language') || 'es';
+    const langButton = document.getElementById('current-lang');
+    
+    if (langButton) {
+      langButton.textContent = storedLang.toUpperCase();
+      console.log('Botón de idioma inicializado a:', storedLang.toUpperCase());
+    }
+    
+    // Inicializar iconos según el tema actual
+    const initialIsDark = document.documentElement.classList.contains('dark');
+    const darkIcon = document.getElementById('dark-icon');
+    const lightIcon = document.getElementById('light-icon');
+    
+    if (initialIsDark) {
+      darkIcon.classList.add('hidden');
+      lightIcon.classList.remove('hidden');
+    } else {
+      darkIcon.classList.remove('hidden');
+      lightIcon.classList.add('hidden');
+    }
   });
-</script> 
+</script>

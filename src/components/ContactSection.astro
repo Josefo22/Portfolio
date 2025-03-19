@@ -101,35 +101,35 @@ import { Icon } from 'astro-icon/components';
         
         <form class="space-y-6">
           <div>
-            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-i18n="name">
+            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-i18n="form-name">
               Nombre
             </label>
-            <input type="text" id="name" name="name" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 dark:focus:ring-emerald-400 dark:focus:border-emerald-400 text-gray-800 dark:text-white" required />
+            <input type="text" id="name" name="name" data-i18n-placeholder="form-name" placeholder="Tu nombre" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 dark:focus:ring-emerald-400 dark:focus:border-emerald-400 text-gray-800 dark:text-white" required />
           </div>
           
           <div>
-            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-i18n="email-label">
+            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-i18n="form-email">
               Email
             </label>
-            <input type="email" id="email" name="email" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 dark:focus:ring-emerald-400 dark:focus:border-emerald-400 text-gray-800 dark:text-white" required />
+            <input type="email" id="email" name="email" data-i18n-placeholder="form-email" placeholder="Tu correo electrónico" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 dark:focus:ring-emerald-400 dark:focus:border-emerald-400 text-gray-800 dark:text-white" required />
           </div>
           
           <div>
             <label for="subject" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-i18n="subject">
               Asunto
             </label>
-            <input type="text" id="subject" name="subject" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 dark:focus:ring-emerald-400 dark:focus:border-emerald-400 text-gray-800 dark:text-white" required />
+            <input type="text" id="subject" name="subject" placeholder="Asunto del mensaje" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 dark:focus:ring-emerald-400 dark:focus:border-emerald-400 text-gray-800 dark:text-white" required />
           </div>
           
           <div>
-            <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-i18n="message">
+            <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-i18n="form-message">
               Mensaje
             </label>
-            <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 dark:focus:ring-emerald-400 dark:focus:border-emerald-400 text-gray-800 dark:text-white resize-none" required></textarea>
+            <textarea id="message" name="message" data-i18n-placeholder="form-message" placeholder="Escribe tu mensaje aquí" rows="4" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 dark:focus:ring-emerald-400 dark:focus:border-emerald-400 text-gray-800 dark:text-white resize-none" required></textarea>
           </div>
           
           <button type="submit" class="w-full px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg transition-colors duration-300 flex items-center justify-center">
-            <span data-i18n="send">Enviar Mensaje</span>
+            <span data-i18n="form-submit">Enviar Mensaje</span>
             <Icon name="mdi:send" class="w-5 h-5 ml-2" />
           </button>
         </form>

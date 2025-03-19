@@ -31,17 +31,6 @@ const skillCategories = [
   }
 ];
 
-// Skill proficiency levels
-const skillProgress = [
-  { name: 'JavaScript', level: 90 },
-  { name: 'Angular', level: 85 },
-  { name: 'Node.js', level: 80 },
-  { name: 'C#', level: 80 },
-  { name: '.NET Core', level: 75 },
-  { name: 'PHP', level: 70 },
-  { name: 'SQL Server', level: 85 },
-  { name: 'Power BI', level: 65 }
-];
 
 // Helper function to get the appropriate icon for each category
 const getCategoryIcon = (categoryName: string) => {
@@ -105,24 +94,6 @@ const getCategoryIcon = (categoryName: string) => {
               </li>
             ))}
           </ul>
-        </div>
-      ))}
-    </div>
-
-    <!-- Barras de progreso -->
-    <h3 class="text-2xl font-semibold text-gray-800 dark:text-white text-center mb-8">
-      Nivel de Experiencia
-    </h3>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 max-w-4xl mx-auto">
-      {skillProgress.map((skill) => (
-        <div>
-          <div class="flex justify-between mb-1">
-            <span class="font-medium text-gray-700 dark:text-gray-200">{skill.name}</span>
-            <span class="text-sm text-gray-500 dark:text-gray-400">{skill.level}%</span>
-          </div>
-          <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-            <div class="bg-gradient-to-r from-emerald-400 to-blue-500 h-2.5 rounded-full" style={`width: ${skill.level}%`}></div>
-          </div>
         </div>
       ))}
     </div>
