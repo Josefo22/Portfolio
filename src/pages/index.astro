@@ -36,10 +36,9 @@ import ClientScripts from '../components/ClientScripts.astro';
       <SkillsSection />
     </section>
     
-    <!-- Sección de Proyectos -->
-    <section id="projects" class="section-container w-full">
-      <ProjectsSection />
-    </section>
+   <section id="projects" class="section-container w-full">
+    <ProjectsSection />
+   </section>
     
     <!-- Sección de Contacto -->
     <section id="contact" class="section-container w-full">
@@ -54,38 +53,73 @@ import ClientScripts from '../components/ClientScripts.astro';
   <ClientScripts />
   
   <script is:inline>
-    // Asegurar que todas las secciones sean visibles
-    document.addEventListener('DOMContentLoaded', function() {
-      const sections = ['skills', 'projects', 'contact'];
-      sections.forEach(id => {
-        const section = document.getElementById(id);
-        if (section) {
-          section.style.display = 'block';
-          section.style.visibility = 'visible';
-          section.style.opacity = '1';
-          console.log(`Sección #${id} configurada como visible`);
-        } else {
-          console.warn(`Sección #${id} no encontrada`);
+    // Definir la función de cambio de idioma de manera global inmediatamente
+    window.changeLanguage = function(lang) {
+      console.log('Cambiando idioma a: ' + lang);
+      
+      // Traducciones disponibles
+      const translations = {
+        'es': {
+          'home': 'Inicio',
+          'about': 'Sobre Mí',
+          'skills': 'Habilidades',
+          'projects': 'Proyectos',
+          'contact': 'Contacto',
+          'hero-title': '¡Hola Mundo! Soy',
+          'hero-subtitle': 'Desarrollador Fullstack',
+          'hero-description': 'Transformando ideas en soluciones digitales con código limpio y diseños creativos.',
+          'contact-me': 'Contáctame',
+          'view-projects': 'Ver Proyectos',
+          'download-cv': 'Descargar CV',
+          'about-title': 'Sobre Mí',
+          'skills-title': 'Mis Habilidades',
+          'projects-title': 'Proyectos Destacados'
+        },
+        'en': {
+          'home': 'Home',
+          'about': 'About Me',
+          'skills': 'Skills',
+          'projects': 'Projects',
+          'contact': 'Contact',
+          'hero-title': 'Hello World! I am',
+          'hero-subtitle': 'Fullstack Developer',
+          'hero-description': 'Transforming ideas into digital solutions with clean code and creative designs.',
+          'contact-me': 'Contact Me',
+          'view-projects': 'View Projects',
+          'download-cv': 'Download CV',
+          'about-title': 'About Me',
+          'skills-title': 'My Skills',
+          'projects-title': 'Featured Projects'
+        }
+      };
+      
+      // Guardar preferencia
+      localStorage.setItem('language', lang);
+      document.documentElement.lang = lang;
+      
+      // Traducir todos los elementos con data-i18n
+      document.querySelectorAll('[data-i18n]').forEach(function(element) {
+        const key = element.getAttribute('data-i18n');
+        if (key && translations[lang] && translations[lang][key]) {
+          element.textContent = translations[lang][key];
         }
       });
       
-      // Aplicar modo oscuro
-      document.documentElement.classList.add('dark');
-      if (typeof localStorage !== 'undefined') {
-        localStorage.setItem('color-theme', 'dark');
-      }
-      
-      // Actualizar íconos de tema
-      const darkIcon = document.getElementById('theme-toggle-dark-icon');
-      const lightIcon = document.getElementById('theme-toggle-light-icon');
-      if (darkIcon && lightIcon) {
-        darkIcon.classList.add('hidden');
-        lightIcon.classList.remove('hidden');
-      }
-      
-      // Eliminar scrollbars adicionales
-      document.body.style.overflow = 'auto';
-      document.documentElement.style.overflow = 'hidden auto';
+      console.log('Idioma cambiado exitosamente a ' + lang);
+    };
+
+    // Función para asegurar que todas las secciones sean visibles
+    function ensureComponentsVisible() {
+      // Asegurar que las secciones sean visibles
+      const sections = ['skills-component', 'projects-component', 'about-component', 'contact-component'];
+      sections.forEach(function(id) {
+        const element = document.getElementById(id);
+        if (element) {
+          element.style.display = 'block';
+          element.style.visibility = 'visible';
+          element.style.opacity = '1';
+        }
+      });
       
       // Buscar y corregir elementos con overflow que puedan causar scrollbars adicionales
       const containers = document.querySelectorAll('main, .container, section');
@@ -94,7 +128,42 @@ import ClientScripts from '../components/ClientScripts.astro';
           el.style.overflow = 'visible';
         }
       });
+    }
+    
+    // Ejecutar tan pronto como sea posible
+    ensureComponentsVisible();
+    
+    // Ejecutar al cargar el DOM
+    document.addEventListener('DOMContentLoaded', function() {
+      ensureComponentsVisible();
+      
+      // Inicializar el idioma
+      const storedLang = localStorage.getItem('language') || 'es';
+      if (window.changeLanguage) {
+        window.changeLanguage(storedLang);
+      }
     });
+    
+    // Como medida adicional, ejecutar también después de un tiempo
+    setTimeout(ensureComponentsVisible, 1000);
+
+    // Aplicar modo oscuro
+    document.documentElement.classList.add('dark');
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('color-theme', 'dark');
+    }
+    
+    // Actualizar íconos de tema
+    const darkIcon = document.getElementById('theme-toggle-dark-icon');
+    const lightIcon = document.getElementById('theme-toggle-light-icon');
+    if (darkIcon && lightIcon) {
+      darkIcon.classList.add('hidden');
+      lightIcon.classList.remove('hidden');
+    }
+    
+    // Eliminar scrollbars adicionales
+    document.body.style.overflow = 'auto';
+    document.documentElement.style.overflow = 'hidden auto';
   </script>
 </Layout>
 

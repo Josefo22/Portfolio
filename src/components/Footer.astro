@@ -1,0 +1,110 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<footer class="bg-gray-100 dark:bg-gray-900 pt-16 pb-8">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Logo y secciones de enlaces -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+      <!-- Logo y descripción -->
+      <div class="col-span-1 md:col-span-1">
+        <a href="#" class="flex items-center text-2xl font-bold text-emerald-600 dark:text-emerald-400 mb-4">
+          <span class="inline-block">JJ</span>
+          <span class="ml-1 text-gray-800 dark:text-white">Dev</span>
+        </a>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">
+          Desarrollo de aplicaciones web y móviles con un enfoque en la experiencia del usuario y el rendimiento.
+        </p>
+        <div class="flex space-x-4">
+          <a href="#" class="text-gray-500 hover:text-emerald-500 dark:text-gray-400 dark:hover:text-emerald-400 transition-colors duration-300">
+            <Icon name="mdi:github" class="w-6 h-6" />
+          </a>
+          <a href="#" class="text-gray-500 hover:text-emerald-500 dark:text-gray-400 dark:hover:text-emerald-400 transition-colors duration-300">
+            <Icon name="mdi:linkedin" class="w-6 h-6" />
+          </a>
+          <a href="#" class="text-gray-500 hover:text-emerald-500 dark:text-gray-400 dark:hover:text-emerald-400 transition-colors duration-300">
+            <Icon name="mdi:twitter" class="w-6 h-6" />
+          </a>
+        </div>
+      </div>
+      
+      <!-- Enlaces rápidos -->
+      <div class="col-span-1">
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">Enlaces Rápidos</h3>
+        <ul class="space-y-2">
+          <li>
+            <a href="#hero-section" class="text-gray-600 hover:text-emerald-500 dark:text-gray-300 dark:hover:text-emerald-400 transition-colors duration-300">Inicio</a>
+          </li>
+          <li>
+            <a href="#about" class="text-gray-600 hover:text-emerald-500 dark:text-gray-300 dark:hover:text-emerald-400 transition-colors duration-300">Sobre mí</a>
+          </li>
+          <li>
+            <a href="#skills" class="text-gray-600 hover:text-emerald-500 dark:text-gray-300 dark:hover:text-emerald-400 transition-colors duration-300">Habilidades</a>
+          </li>
+          <li>
+            <a href="#projects" class="text-gray-600 hover:text-emerald-500 dark:text-gray-300 dark:hover:text-emerald-400 transition-colors duration-300">Proyectos</a>
+          </li>
+          <li>
+            <a href="#contact" class="text-gray-600 hover:text-emerald-500 dark:text-gray-300 dark:hover:text-emerald-400 transition-colors duration-300">Contacto</a>
+          </li>
+        </ul>
+      </div>
+      
+      <!-- Servicios -->
+      <div class="col-span-1">
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">Servicios</h3>
+        <ul class="space-y-2">
+          <li>
+            <a href="#" class="text-gray-600 hover:text-emerald-500 dark:text-gray-300 dark:hover:text-emerald-400 transition-colors duration-300">Desarrollo Web</a>
+          </li>
+          <li>
+            <a href="#" class="text-gray-600 hover:text-emerald-500 dark:text-gray-300 dark:hover:text-emerald-400 transition-colors duration-300">Aplicaciones Móviles</a>
+          </li>
+          <li>
+            <a href="#" class="text-gray-600 hover:text-emerald-500 dark:text-gray-300 dark:hover:text-emerald-400 transition-colors duration-300">Diseño UX/UI</a>
+          </li>
+          <li>
+            <a href="#" class="text-gray-600 hover:text-emerald-500 dark:text-gray-300 dark:hover:text-emerald-400 transition-colors duration-300">Consultoría IT</a>
+          </li>
+        </ul>
+      </div>
+      
+      <!-- Contacto -->
+      <div class="col-span-1">
+        <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">Contacto</h3>
+        <ul class="space-y-2">
+          <li class="flex items-start space-x-2">
+            <Icon name="mdi:map-marker" class="w-5 h-5 text-emerald-500 mt-0.5" />
+            <span class="text-gray-600 dark:text-gray-300">Envigado, Colombia</span>
+          </li>
+          <li class="flex items-start space-x-2">
+            <Icon name="mdi:email" class="w-5 h-5 text-emerald-500 mt-0.5" />
+            <span class="text-gray-600 dark:text-gray-300">contacto@ejemplo.com</span>
+          </li>
+          <li class="flex items-start space-x-2">
+            <Icon name="mdi:phone" class="w-5 h-5 text-emerald-500 mt-0.5" />
+            <span class="text-gray-600 dark:text-gray-300">+57 300 123 4567</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- Línea divisoria -->
+    <div class="border-t border-gray-200 dark:border-gray-800 my-8"></div>
+    
+    <!-- Copyright y enlaces legales -->
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 md:mb-0">
+        &copy; {new Date().getFullYear()} Juan José | Todos los derechos reservados
+      </p>
+      <div class="flex space-x-4">
+        <a href="#" class="text-gray-600 hover:text-emerald-500 dark:text-gray-400 dark:hover:text-emerald-400 transition-colors duration-300 text-sm">
+          Política de Privacidad
+        </a>
+        <a href="#" class="text-gray-600 hover:text-emerald-500 dark:text-gray-400 dark:hover:text-emerald-400 transition-colors duration-300 text-sm">
+          Términos de Servicio
+        </a>
+      </div>
+    </div>
+  </div>
+</footer> 

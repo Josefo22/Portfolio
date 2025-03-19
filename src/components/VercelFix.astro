@@ -1,0 +1,85 @@
+---
+// Componente especial para corregir problemas de visibilidad en Vercel
+---
+
+<script is:inline>
+  // Función para corregir problemas de visibilidad en Vercel
+  function fixVercelRendering() {
+    try {
+      // Lista de secciones que deben ser visibles
+      const sectionIds = ['skills', 'projects', 'contact'];
+      
+      // Función para hacer visible una sección
+      function makeVisible(id) {
+        const section = document.getElementById(id);
+        if (section) {
+          section.style.display = 'block';
+          section.style.visibility = 'visible';
+          section.style.opacity = '1';
+          section.style.overflow = 'visible';
+          section.style.height = 'auto';
+          section.style.minHeight = '100px';
+          console.log(`VercelFix: Sección #${id} configurada como visible`);
+        } else {
+          console.warn(`VercelFix: Sección #${id} no encontrada`);
+          
+          // Buscar componentes por su clase a modo de respaldo
+          const componentContainers = document.querySelectorAll(`.${id}-section, .section-container`);
+          componentContainers.forEach(container => {
+            container.style.display = 'block';
+            container.style.visibility = 'visible';
+            container.style.opacity = '1';
+          });
+        }
+      }
+      
+      // Asegurar que las secciones sean visibles en diferentes momentos
+      function runFix() {
+        sectionIds.forEach(makeVisible);
+        
+        // También seleccionar todos los elementos section para asegurar
+        document.querySelectorAll('section').forEach(section => {
+          section.style.display = 'block';
+          section.style.visibility = 'visible';
+          section.style.opacity = '1';
+        });
+      }
+      
+      // Primera ejecución inmediata
+      runFix();
+      
+      // Ejecuciones adicionales a diferentes tiempos
+      setTimeout(runFix, 100);
+      setTimeout(runFix, 500);
+      setTimeout(runFix, 1000);
+      setTimeout(runFix, 2000);
+      
+      // Ejecución después de que las imágenes y otros recursos se carguen
+      window.addEventListener('load', runFix);
+      
+      // MutationObserver para detectar cambios en el DOM
+      const observer = new MutationObserver(mutations => {
+        runFix();
+      });
+      
+      // Comenzar a observar el cuerpo del documento
+      observer.observe(document.body, { 
+        childList: true, 
+        subtree: true 
+      });
+      
+      console.log('VercelFix: Script de corrección iniciado');
+    } catch (e) {
+      console.error('VercelFix: Error en la corrección de renderizado:', e);
+    }
+  }
+  
+  // Ejecutar en el navegador
+  if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+    // Inmediato
+    fixVercelRendering();
+    
+    // También en DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', fixVercelRendering);
+  }
+</script> 

@@ -1,30 +1,32 @@
 ---
 // SkillsSection.astro
 // Data structures for skills categories and progress
+import { Icon } from 'astro-icon/components';
+
 const skillCategories = [
   { 
     name: 'Frontend', 
-    icon: 'monitor',
+    icon: 'mdi:monitor',
     items: ['HTML/CSS', 'JavaScript', 'Angular', 'React', 'Astro', 'Tailwind CSS', 'Bootstrap'] 
   },
   { 
     name: 'Backend', 
-    icon: 'server',
+    icon: 'mdi:server',
     items: ['Node.js', 'C#', '.NET Core', 'PHP', 'SQL Server', 'SQLite', 'MySQL'] 
   },
   { 
     name: 'DevOps', 
-    icon: 'refresh',
+    icon: 'mdi:refresh-circle',
     items: ['Git', 'Docker', 'CI/CD', 'Vercel', 'XAMPP'] 
   },
   { 
     name: 'Data & BI', 
-    icon: 'database',
+    icon: 'mdi:database',
     items: ['Power BI', 'SQL Server', 'Entity Framework Core'] 
   },
   { 
     name: 'Mobile', 
-    icon: 'smartphone',
+    icon: 'mdi:cellphone',
     items: ['Android Studio', 'Java', 'SQLite'] 
   }
 ];
@@ -70,185 +72,79 @@ const getCategoryIcon = (categoryName: string) => {
 };
 ---
 
-<section class="relative py-20 overflow-hidden bg-gray-50 dark:bg-gray-800">
-  <!-- Dotted background pattern -->
-  <div class="absolute inset-0 opacity-5">
-    <div class="absolute inset-0" style="background-image: radial-gradient(#10b981 1px, transparent 1px); background-size: 20px 20px;"></div>
-  </div>
-
-  <div class="container relative z-10 px-4 mx-auto">
-    <!-- Section header -->
+<div id="skills-component" class="skills-section py-20 w-full block">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Título de sección -->
     <div class="text-center mb-16">
-      <div class="overflow-hidden">
-        <h2 class="inline-block text-4xl font-bold text-gray-800 dark:text-white mb-2 opacity-0 animate-fade-in">
-          Mis Habilidades
-        </h2>
-      </div>
-      <div class="w-24 h-1 mx-auto my-4 bg-gradient-to-r from-emerald-400 to-blue-500 rounded-full opacity-0 animate-width"></div>
-      <p class="max-w-2xl mx-auto text-gray-600 dark:text-gray-300 opacity-0 animate-fade-in-delay">
+      <h2 data-i18n="skills-title" class="text-4xl font-bold text-gray-800 dark:text-white">
+        Mis Habilidades
+      </h2>
+      <div class="w-24 h-1 bg-emerald-500 mx-auto mt-4"></div>
+      <p data-i18n="skills-description" class="mt-4 text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
         Herramientas y tecnologías con las que he trabajado para crear soluciones digitales eficientes e innovadoras.
       </p>
     </div>
 
-    <!-- Skills categories grid -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-      {skillCategories.map((category, index) => (
-        <div class="bg-white dark:bg-gray-900 rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:translate-y-[-5px] opacity-0 skill-card" data-index={index}>
-          <div class="p-6">
-            <div class="flex items-center mb-4">
-              <div class="w-10 h-10 rounded-full bg-gradient-to-r from-emerald-400 to-blue-500 flex items-center justify-center mr-3">
-                <Fragment set:html={getCategoryIcon(category.name)} />
-              </div>
-              <h3 class="text-xl font-bold text-gray-800 dark:text-white">{category.name}</h3>
-            </div>
-            <ul class="space-y-3">
-              {category.items.map((skill) => (
-                <li class="flex items-center skill-item">
-                  <div class="mr-2 text-emerald-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <span class="text-gray-700 dark:text-gray-300">{skill}</span>
-                </li>
-              ))}
-            </ul>
+    <!-- Categorías de habilidades -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+      {skillCategories.map((category) => (
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg transform hover:scale-105 transition-transform duration-300 hover:shadow-xl border-t-4 border-emerald-500">
+          <div class="flex items-center mb-4">
+            <span class="text-emerald-500 mr-3">
+              <Icon name={category.icon} class="w-8 h-8" />
+            </span>
+            <h3 class="text-xl font-semibold text-gray-800 dark:text-white">
+              {category.name}
+            </h3>
           </div>
+          <ul class="space-y-2">
+            {category.items.map((item) => (
+              <li class="flex items-center text-gray-600 dark:text-gray-300">
+                <Icon name="mdi:check-circle" class="text-emerald-500 w-5 h-5 mr-2" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       ))}
     </div>
 
-    <!-- Skills progress section - Uncomment if you want to use this section -->
-    <!-- 
-    <div class="max-w-3xl mx-auto">
-      <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-8 text-center opacity-0 animate-fade-in-delay-2">Nivel de Experiencia</h3>
-      <div class="space-y-6">
-        {skillProgress.map((skill) => (
-          <div class="mb-4">
-            <div class="flex justify-between mb-1">
-              <span class="text-gray-700 dark:text-gray-300 font-medium">{skill.name}</span>
-              <span class="text-gray-600 dark:text-gray-400">{skill.level}%</span>
-            </div>
-            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-              <div class="bg-gradient-to-r from-emerald-400 to-blue-500 h-2.5 rounded-full progress-bar" data-width={skill.level}></div>
-            </div>
+    <!-- Barras de progreso -->
+    <h3 class="text-2xl font-semibold text-gray-800 dark:text-white text-center mb-8">
+      Nivel de Experiencia
+    </h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 max-w-4xl mx-auto">
+      {skillProgress.map((skill) => (
+        <div>
+          <div class="flex justify-between mb-1">
+            <span class="font-medium text-gray-700 dark:text-gray-200">{skill.name}</span>
+            <span class="text-sm text-gray-500 dark:text-gray-400">{skill.level}%</span>
           </div>
-        ))}
-      </div>
+          <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+            <div class="bg-gradient-to-r from-emerald-400 to-blue-500 h-2.5 rounded-full" style={`width: ${skill.level}%`}></div>
+          </div>
+        </div>
+      ))}
     </div>
-    -->
   </div>
-</section>
-
-<script>
-  import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-  
-  gsap.registerPlugin(ScrollTrigger);
-  
-  // Initialize animations when DOM is loaded
-  document.addEventListener('DOMContentLoaded', () => {
-    // Title and section animations
-    gsap.to('.animate-fade-in', { opacity: 1, duration: 0.8, delay: 0.2 });
-    gsap.to('.animate-width', { opacity: 1, width: '6rem', duration: 1, delay: 0.5 });
-    gsap.to('.animate-fade-in-delay', { opacity: 1, duration: 0.8, delay: 0.8 });
-    gsap.to('.animate-fade-in-delay-2', { opacity: 1, duration: 0.8, delay: 1 });
-    
-    // Skill cards animation
-    const skillCards = document.querySelectorAll('.skill-card');
-    skillCards.forEach((card, index) => {
-      gsap.to(card, {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        delay: 0.2 * index,
-        scrollTrigger: {
-          trigger: card,
-          start: 'top 85%',
-        }
-      });
-    });
-    
-    // Progress bars animation
-    const progressBars = document.querySelectorAll('.progress-bar');
-    progressBars.forEach((bar) => {
-      const width = bar.getAttribute('data-width');
-      gsap.fromTo(bar,
-        { width: '0%' },
-        { 
-          width: `${width}%`, 
-          duration: 1.5, 
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: bar,
-            start: 'top 90%',
-          }
-        }
-      );
-    });
-    
-    // Skill items animation
-    const skillItems = document.querySelectorAll('.skill-item');
-    skillItems.forEach((item, index) => {
-      gsap.fromTo(item,
-        { opacity: 0, x: -20 },
-        { 
-          opacity: 1, 
-          x: 0, 
-          duration: 0.4, 
-          delay: 0.1 * (index % 5), // Group by category
-          scrollTrigger: {
-            trigger: item,
-            start: 'top 90%',
-          }
-        }
-      );
-    });
-  });
-</script>
+</div>
 
 <style>
-  /* Animation classes */
-  .animate-fade-in {
-    opacity: 0;
-  }
-  
-  .animate-fade-in-delay {
-    opacity: 0;
-  }
-  
-  .animate-fade-in-delay-2 {
-    opacity: 0;
-  }
-  
-  .animate-width {
-    opacity: 0;
-    width: 0;
-  }
-  
-  .skill-card {
-    transform: translateY(20px);
-  }
-  
-  .progress-bar {
-    width: 0%;
-    transition: width 1.5s ease-out;
-  }
-  
-  @keyframes floatAnimation {
-    0% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-    100% {
-      transform: translateY(0px);
-    }
-  }
-  
-  /* Hover effects */
-  .skill-card:hover {
-    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.1);
+  .skills-section {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 </style>
+
+<script>
+  // Asegurar que el componente de habilidades sea visible
+  document.addEventListener('DOMContentLoaded', function() {
+    const skillsComponent = document.getElementById('skills-component');
+    if (skillsComponent) {
+      skillsComponent.style.display = 'block';
+      skillsComponent.style.visibility = 'visible';
+      skillsComponent.style.opacity = '1';
+    }
+  });
+</script>

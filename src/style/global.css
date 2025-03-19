@@ -180,3 +180,24 @@ body::-webkit-scrollbar {
   overflow: visible !important;
 }
 
+/* Asegurarse de que todas las secciones sean visibles */
+section, 
+#skills, 
+#projects, 
+#contact {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-height: 100px !important;
+  overflow: visible !important;
+}
+
+/* Asegurarse de que los componentes principales sean visibles */
+.section-container {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+

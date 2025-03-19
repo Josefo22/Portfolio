@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import astroIcon from "astro-icon"; // Asegúrate de importar el paquete
-import tailwind from "@astrojs/tailwind";
+import tailwind from '@astrojs/tailwind';
+import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,12 +14,12 @@ export default defineConfig({
         assets: 'assets'
     },
     integrations: [
-        astroIcon({
+        tailwind(),
+        icon({
           include: {
-            mdi: ["*"], // Incluir todos los íconos de "mdi"
-          },
-        }),
-        tailwind()
+            mdi: ["*"], // Incluir todos los iconos de Material Design Icons
+          }
+        })
     ],
     vite: {
         // No hacer transpilación durante el build (optimización)

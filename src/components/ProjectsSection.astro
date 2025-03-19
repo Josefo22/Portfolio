@@ -1,302 +1,234 @@
 ---
 // ProjectsSection.astro
+import { Icon } from 'astro-icon/components';
+
+// Datos de proyectos
 const projects = [
   {
     titleKey: 'pos-system-title',
     descriptionKey: 'pos-system-description',
-    technologies: ['Angular', 'C#', 'SQL Server', 'Azure'],
+    technologies: ['React', 'Node.js', 'MongoDB', 'Socket.IO', 'Electron'],
     image: 'https://placehold.co/600x400/10b981/FFFFFF?text=Sistema+POS',
-    link: 'https://github.com/Pastu17/AppCRUD',
-    categories: ['Web', 'Backend']
+    link: '#',
+    categories: ['web', 'desktop']
   },
   {
     titleKey: 'hotel-system-title',
     descriptionKey: 'hotel-system-description',
-    technologies: ['PHP', 'SQL Server', 'Bootstrap', 'XAMPP'],
+    technologies: ['Angular', 'Firebase', 'NgRx', 'Bootstrap'],
     image: 'https://placehold.co/600x400/10b981/FFFFFF?text=Sistema+Hotel',
-    link: 'https://github.com/Josefo22',
-    categories: ['Web', 'Backend']
+    link: '#',
+    categories: ['web']
   },
   {
     titleKey: 'parking-crud-title',
     descriptionKey: 'parking-crud-description',
-    technologies: ['PHP', 'SQL Server', 'HTML', 'CSS', 'JavaScript'],
-    image: 'https://placehold.co/600x400/10b981/FFFFFF?text=Parking+CRUD',
-    link: 'https://github.com/Josefo22',
-    categories: ['Web', 'Backend']
+    technologies: ['Vue.js', 'Express', 'MySQL', 'Tailwind CSS'],
+    image: 'https://placehold.co/600x400/10b981/FFFFFF?text=CRUD+Parqueadero',
+    link: '#',
+    categories: ['web']
   },
   {
     titleKey: 'ecommerce-title',
     descriptionKey: 'ecommerce-description',
-    technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
+    technologies: ['Next.js', 'Strapi', 'PostgreSQL', 'Stripe'],
     image: 'https://placehold.co/600x400/10b981/FFFFFF?text=E-commerce',
     link: '#',
-    categories: ['Web', 'Backend']
+    categories: ['web', 'ecommerce']
   },
   {
     titleKey: 'dashboard-title',
     descriptionKey: 'dashboard-description',
-    technologies: ['Vue.js', 'Express', 'PostgreSQL', 'Chart.js'],
-    image: 'https://placehold.co/600x400/10b981/FFFFFF?text=Dashboard',
+    technologies: ['React', 'D3.js', 'GraphQL', 'Material UI'],
+    image: 'https://placehold.co/600x400/10b981/FFFFFF?text=Dashboard+Analytics',
     link: '#',
-    categories: ['Web', 'UI/UX']
+    categories: ['web', 'dashboard']
   },
   {
     titleKey: 'management-app-title',
     descriptionKey: 'management-app-description',
-    technologies: ['React Native', 'Firebase', 'Redux'],
-    image: 'https://placehold.co/600x400/10b981/FFFFFF?text=Management+App',
+    technologies: ['React Native', 'Redux', 'Firebase', 'Native Base'],
+    image: 'https://placehold.co/600x400/10b981/FFFFFF?text=App+Gestion',
     link: '#',
-    categories: ['Mobile', 'Backend']
-  }
+    categories: ['mobile']
+  },
 ];
 
-
-// Categorías para filtrar
-const categories = ['Todos', 'Web', 'Mobile', 'UI/UX', 'Backend'];
+// Categorías únicas para los filtros
+const categories = [...new Set(projects.flatMap(project => project.categories))];
 ---
 
-<section id="projects" class="relative py-24 bg-gray-50 dark:bg-gray-800 overflow-hidden">
-  <!-- Elementos decorativos de fondo -->
-  <div class="absolute top-0 left-0 w-64 h-64 bg-gradient-to-r from-emerald-300 to-blue-300 rounded-full filter blur-3xl opacity-10 -translate-x-1/2 -translate-y-1/2"></div>
-  <div class="absolute bottom-0 right-0 w-80 h-80 bg-gradient-to-r from-blue-300 to-emerald-300 rounded-full filter blur-3xl opacity-10 translate-x-1/2 translate-y-1/2"></div>
-  
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-    <!-- Encabezado de la sección -->
-    <div class="text-center mb-16 opacity-0 projects-header">
-      <div class="inline-block mb-3">
-        <span class="inline-block text-emerald-500 font-medium text-lg" data-i18n="portfolio">Portfolio</span>
-      </div>
-      <h2 class="text-4xl font-bold text-gray-800 dark:text-white mb-4" data-i18n="projects-title">Proyectos Destacados</h2>
-      <div class="w-24 h-1 mx-auto my-4 bg-gradient-to-r from-emerald-400 to-blue-500 rounded-full"></div>
-      <p class="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto" data-i18n="projects-description">
-        Explora algunos de mis proyectos recientes. Cada proyecto es único y resuelve problemas específicos de negocio
-        utilizando las tecnologías más adecuadas.
+<div id="projects-component" class="projects-section py-20 w-full block">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Título de sección -->
+    <div class="text-center mb-16">
+      <p data-i18n="portfolio" class="text-lg font-medium text-emerald-500">
+        Portfolio
+      </p>
+      <h2 data-i18n="projects-title" class="text-4xl font-bold text-gray-800 dark:text-white mt-2">
+        Proyectos Destacados
+      </h2>
+      <div class="w-24 h-1 bg-emerald-500 mx-auto mt-4"></div>
+      <p data-i18n="projects-description" class="mt-4 text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+        Explora algunos de mis proyectos recientes. Cada proyecto es único y resuelve problemas específicos
+        de negocio utilizando las tecnologías más adecuadas.
       </p>
     </div>
-    
-    <!-- Filtro de categorías -->
-    <div class="flex justify-center flex-wrap gap-3 mb-14 opacity-0 filter-buttons">
-      {categories.map((category, index) => (
+
+    <!-- Filtros de categorías -->
+    <div class="flex flex-wrap justify-center gap-3 mb-10">
+      <button 
+        class="filter-btn all-btn bg-emerald-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+        data-category="all"
+      >
+        Todos
+      </button>
+      
+      {categories.map((category) => (
         <button 
-          class={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 shadow-sm transform hover:scale-105 hover:shadow-md ${
-            index === 0 
-              ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white' 
-              : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-white hover:bg-emerald-500 hover:text-white'
-          }`}
+          class="filter-btn bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-500 focus:ring-offset-2"
           data-category={category}
         >
-          {category}
+          {category.charAt(0).toUpperCase() + category.slice(1)}
         </button>
       ))}
     </div>
-    
+
     <!-- Grid de proyectos -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 projects-grid">
-      {projects.map((project, index) => (
-        <a href={project.link} class="group project-card opacity-0" data-categories={project.categories.join(',')}>
-          <div class="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-md transition-all duration-500 hover:shadow-xl">
-            <div class="h-52 bg-gray-200 dark:bg-gray-800 relative overflow-hidden">
-              <!-- Overlay -->
-              <div class="absolute inset-0 bg-gradient-to-tr from-emerald-500 to-blue-500 opacity-0 group-hover:opacity-90 transition-all duration-500 flex items-center justify-center z-10">
-                <span class="text-white font-medium px-5 py-3 rounded-lg border-2 border-white opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-8 group-hover:translate-y-0" data-i18n="view-project">
-                  Ver proyecto
-                </span>
-              </div>
-              
-              <!-- Imagen de proyecto -->
-              <img 
-                src={project.image} 
-                alt={project.titleKey} 
-                class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-                loading="lazy"
-                onerror="this.src='https://placehold.co/600x400/10b981/FFFFFF?text=Imagen+no+disponible';"
-              />
-            </div>
-            
-            <!-- Información del proyecto -->
-            <div class="p-6">
-              <h3 class="text-xl font-bold mb-3 text-gray-800 dark:text-white group-hover:text-emerald-500 dark:group-hover:text-emerald-400 transition-colors duration-300" data-i18n={project.titleKey}>
-                {project.titleKey}
-              </h3>
-              <p class="text-gray-600 dark:text-gray-300 mb-5 line-clamp-2" data-i18n={project.descriptionKey}>
-                {project.descriptionKey}
-              </p>
-              
-              <!-- Etiquetas de tecnologías -->
-              <div class="flex flex-wrap gap-2">
-                {project.technologies.map(tech => (
-                  <span class="px-3 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full transition-colors duration-300 hover:bg-emerald-100 dark:hover:bg-emerald-800">
-                    {tech}
-                  </span>
-                ))}
-              </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 project-grid">
+      {projects.map((project) => (
+        <div class="project-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:transform hover:scale-105" data-categories={project.categories.join(' ')}>
+          <div class="relative overflow-hidden project-image-container h-48">
+            <img 
+              src={project.image} 
+              alt={project.titleKey} 
+              class="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+              onerror="this.src='https://placehold.co/600x400/10b981/FFFFFF?text=Imagen+No+Disponible';"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+              <a href={project.link} class="px-4 py-2 bg-emerald-500 text-white rounded-lg text-sm font-medium hover:bg-emerald-600 transition-colors duration-300" data-i18n="view-project">
+                Ver proyecto
+              </a>
             </div>
           </div>
-        </a>
+          
+          <div class="p-6">
+            <h3 data-i18n={project.titleKey} class="text-xl font-bold text-gray-800 dark:text-white mb-2">
+              {project.titleKey === 'pos-system-title' ? 'Sistema POS' : 
+               project.titleKey === 'hotel-system-title' ? 'Sistema de Hotel' :
+               project.titleKey === 'parking-crud-title' ? 'CRUD de Parqueadero' :
+               project.titleKey === 'ecommerce-title' ? 'Plataforma E-commerce' :
+               project.titleKey === 'dashboard-title' ? 'Dashboard Analítico' :
+               project.titleKey === 'management-app-title' ? 'App de Gestión' : 
+               project.titleKey}
+            </h3>
+            
+            <p data-i18n={project.descriptionKey} class="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
+              {project.descriptionKey === 'pos-system-description' ? 'Sistema de punto de venta con gestión de inventario, ventas e informes.' :
+               project.descriptionKey === 'hotel-system-description' ? 'Aplicación para gestión de reservas, pagos y clientes de hotel.' :
+               project.descriptionKey === 'parking-crud-description' ? 'Sistema para administración de parqueaderos con registro y pagos de vehículos.' :
+               project.descriptionKey === 'ecommerce-description' ? 'Plataforma completa con carrito de compras, pagos y panel administrativo.' :
+               project.descriptionKey === 'dashboard-description' ? 'Dashboard interactivo para visualización de datos empresariales en tiempo real.' :
+               project.descriptionKey === 'management-app-description' ? 'Aplicación para gestión de recursos y proyectos empresariales.' :
+               project.descriptionKey}
+            </p>
+            
+            <div class="flex flex-wrap gap-2 mb-4">
+              {project.technologies.map((tech) => (
+                <span class="text-xs font-medium px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300">
+                  {tech}
+                </span>
+              ))}
+            </div>
+            
+            <div class="flex justify-between items-center">
+              <div class="flex space-x-1">
+                {project.categories.map((cat) => (
+                  <span class="text-xs text-gray-500 dark:text-gray-400">#{cat}</span>
+                ))}
+              </div>
+              <a href={project.link} class="text-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium text-sm flex items-center transition-colors duration-300">
+                <span data-i18n="view-project">Ver proyecto</span>
+                <Icon name="mdi:arrow-right" class="w-4 h-4 ml-1" />
+              </a>
+            </div>
+          </div>
+        </div>
       ))}
     </div>
     
-    <!-- Botón para ver más proyectos -->
-    <div class="text-center opacity-0 view-more">
-      <a href="/projects" class="group relative inline-flex items-center justify-center px-8 py-3 overflow-hidden font-medium bg-gradient-to-r from-emerald-500 to-blue-500 text-white rounded-lg shadow-md transition-all duration-300 ease-out hover:shadow-lg">
-        <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 translate-x-full group-hover:translate-x-0 ease">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-          </svg>
-        </span>
-        <span class="absolute flex items-center justify-center w-full h-full text-white transition-all duration-300 transform group-hover:-translate-x-full ease" data-i18n="view-all-projects">Ver todos los proyectos</span>
-        <span class="relative invisible" data-i18n="view-all-projects">Ver todos los proyectos</span>
+    <!-- Botón Ver Todos los Proyectos -->
+    <div class="text-center mt-12">
+      <a href="#" class="inline-flex items-center px-6 py-3 border border-emerald-500 text-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 rounded-lg transition-colors duration-300 font-medium">
+        <span data-i18n="view-all-projects">Ver todos los proyectos</span>
+        <Icon name="mdi:arrow-right" class="w-5 h-5 ml-2" />
       </a>
     </div>
   </div>
-</section>
+</div>
+
+<style>
+  .projects-section {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  .project-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .project-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .project-image-container {
+    position: relative;
+  }
+</style>
 
 <script>
-  import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-  
-  gsap.registerPlugin(ScrollTrigger);
-  
-  document.addEventListener('DOMContentLoaded', () => {
-    // Animaciones de entrada
-    gsap.to('.projects-header', {
-      opacity: 1,
-      y: 0,
-      duration: 0.8,
-      scrollTrigger: {
-        trigger: '#projects',
-        start: 'top 80%',
-      }
-    });
+  // Asegurar que el componente de proyectos sea visible
+  document.addEventListener('DOMContentLoaded', function() {
+    const projectsComponent = document.getElementById('projects-component');
+    if (projectsComponent) {
+      projectsComponent.style.display = 'block';
+      projectsComponent.style.visibility = 'visible';
+      projectsComponent.style.opacity = '1';
+    }
     
-    gsap.to('.filter-buttons', {
-      opacity: 1,
-      y: 0,
-      duration: 0.8,
-      delay: 0.2,
-      scrollTrigger: {
-        trigger: '#projects',
-        start: 'top 80%',
-      }
-    });
-    
-    // Animación de las tarjetas de proyectos
-    const projectCards = gsap.utils.toArray<HTMLElement>('.project-card');
-    projectCards.forEach((card, index) => {
-      gsap.to(card, {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        delay: 0.1 * index,
-        scrollTrigger: {
-          trigger: '.projects-grid',
-          start: 'top 85%',
-        }
-      });
-    });
-    
-    gsap.to('.view-more', {
-      opacity: 1,
-      y: 0,
-      duration: 0.8,
-      delay: 0.4,
-      scrollTrigger: {
-        trigger: '.projects-grid',
-        start: 'center 85%',
-      }
-    });
-    
-    // Lógica para filtrar proyectos
-    const filterButtons = document.querySelectorAll<HTMLButtonElement>('[data-category]');
-    const projectItems = document.querySelectorAll<HTMLElement>('.project-card');
+    // Filtrado de proyectos por categoría
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
     
     filterButtons.forEach(button => {
       button.addEventListener('click', () => {
-        // Actualizar estado de los botones
+        // Quitar la clase activa de todos los botones
         filterButtons.forEach(btn => {
-          btn.classList.remove('bg-gradient-to-r', 'from-emerald-500', 'to-emerald-600', 'text-white');
-          btn.classList.add('bg-white', 'dark:bg-gray-700', 'text-gray-700', 'dark:text-white');
+          btn.classList.remove('bg-emerald-500', 'text-white');
+          btn.classList.add('bg-gray-200', 'dark:bg-gray-700', 'text-gray-800', 'dark:text-white');
         });
         
-        button.classList.remove('bg-white', 'dark:bg-gray-700', 'text-gray-700', 'dark:text-white');
-        button.classList.add('bg-gradient-to-r', 'from-emerald-500', 'to-emerald-600', 'text-white');
+        // Añadir la clase activa al botón actual
+        button.classList.remove('bg-gray-200', 'dark:bg-gray-700', 'text-gray-800', 'dark:text-white');
+        button.classList.add('bg-emerald-500', 'text-white');
         
-        const selectedCategory = button.getAttribute('data-category') || '';
+        const category = button.getAttribute('data-category') || 'all';
         
         // Filtrar proyectos
-        projectItems.forEach(item => {
-          // Reiniciar las animaciones para los elementos filtrados
-          gsap.set(item, { opacity: 0, y: 20 });
-          
-          const itemCategories = item.getAttribute('data-categories') || '';
-          
-          if (selectedCategory === 'Todos' || itemCategories.includes(selectedCategory)) {
-            // Mostrar y animar
-            item.style.display = 'block';
-            gsap.to(item, {
-              opacity: 1,
-              y: 0,
-              duration: 0.5,
-              delay: 0.1 * Math.random(), // Pequeño retraso aleatorio para efecto escalonado
-            });
+        projectCards.forEach(card => {
+          if (category === 'all') {
+            (card as HTMLElement).style.display = 'block';
           } else {
-            // Ocultar
-            gsap.to(item, {
-              opacity: 0,
-              y: 20,
-              duration: 0.3,
-              onComplete: () => {
-                item.style.display = 'none';
-              }
-            });
+            const categories = card.getAttribute('data-categories')?.split(' ') || [];
+            if (categories.includes(category)) {
+              (card as HTMLElement).style.display = 'block';
+            } else {
+              (card as HTMLElement).style.display = 'none';
+            }
           }
         });
       });
     });
   });
 </script>
-
-<style>
-  /* Estilos base para las animaciones */
-  .projects-header,
-  .filter-buttons,
-  .project-card,
-  .view-more {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  
-  /* Efecto hover para los botones de filtro */
-  [data-category]:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
-  }
-  
-  /* Animación para las imágenes de proyecto */
-  .project-card img {
-    transition: transform 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-  }
-  
-  /* Animación para el contenedor de proyectos cuando cambia de filtros */
-  .projects-grid {
-    transition: height 0.5s ease-out;
-  }
-  
-  /* Línea de degradado bajo el título */
-  @keyframes gradientAnimation {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-  
-  .projects-grid > a:hover {
-    transform: translateY(-8px);
-  }
-</style>

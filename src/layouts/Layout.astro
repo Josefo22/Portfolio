@@ -1,4 +1,11 @@
 ---
+import { ViewTransitions } from 'astro:transitions';
+import ClientScripts from '../components/ClientScripts.astro';
+import ThemeLanguageSelector from '../components/ThemeLanguageSelector.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import VercelFix from '../components/VercelFix.astro';
+
 interface Props {
 	title: string;
 }
@@ -7,220 +14,145 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Portfolio de Juan José - Desarrollador Full Stack" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-		<meta name="theme-color" content="#10b981" />
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-		<meta name="format-detection" content="telephone=no" />
+		<meta name="description" content="Portfolio de Juan José - Desarrollador Fullstack" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-		<!-- Prevenir el parpadeo inicial -->
+		<ViewTransitions />
+		
+		<!-- Script para forzar modo oscuro inmediatamente y evitar parpadeo -->
 		<script is:inline>
-			(function() {
-				try {
-					const theme = localStorage.getItem('color-theme');
-					const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-					if (theme === 'dark' || (!theme && systemDark)) {
-						document.documentElement.classList.add('dark');
-						console.log('Tema oscuro aplicado en la inicialización');
-					} else {
-						document.documentElement.classList.remove('dark');
-						console.log('Tema claro aplicado en la inicialización');
-					}
-				} catch (e) {
-					console.error('Error al inicializar tema:', e);
-				}
-			})();
+			// Verificar si se debe aplicar el tema oscuro
+			const storedTheme = typeof localStorage !== 'undefined' && localStorage.getItem('color-theme');
+			const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+			
+			// Si está almacenado en localStorage o si el sistema prefiere oscuro
+			if (storedTheme === 'dark' || (!storedTheme && prefersDarkScheme.matches)) {
+				document.documentElement.classList.add('dark');
+			} else {
+				document.documentElement.classList.remove('dark');
+			}
 		</script>
+		
+		<style is:global>
+			:root {
+				--fs-xs: 0.75rem;
+				--fs-sm: 0.875rem;
+				--fs-md: 1rem;
+				--fs-lg: 1.125rem;
+				--fs-xl: 1.25rem;
+				--fs-2xl: 1.5rem;
+				--fs-3xl: 1.875rem;
+				--fs-4xl: 2.25rem;
+				--fs-5xl: 3rem;
+				--fs-6xl: 3.75rem;
+				--fs-7xl: 4.5rem;
+				--fs-8xl: 6rem;
+				
+				/* Colores - Modo Claro */
+				--color-text: #1f2937;
+				--color-bg: #ffffff;
+				--color-border: #e5e7eb;
+				--color-card: #f9fafb;
+				--color-card-hover: #f3f4f6;
+				--color-shadow: rgba(0, 0, 0, 0.1);
+				--color-accent: #10b981;
+				--color-accent-hover: #059669;
+				--color-secondary: #3b82f6;
+				--color-secondary-hover: #2563eb;
+			}
+			
+			.dark {
+				/* Colores - Modo Oscuro */
+				--color-text: #f3f4f6;
+				--color-bg: #111827;
+				--color-border: #374151;
+				--color-card: #1f2937;
+				--color-card-hover: #374151;
+				--color-shadow: rgba(0, 0, 0, 0.4);
+				--color-accent: #10b981;
+				--color-accent-hover: #34d399;
+				--color-secondary: #3b82f6;
+				--color-secondary-hover: #60a5fa;
+			}
+		
+			html {
+				font-family: 'Inter', system-ui, sans-serif;
+				font-size: var(--fs-md);
+				scroll-behavior: smooth;
+				scroll-padding-top: 5rem;
+				overflow-y: auto;
+				overflow-x: hidden;
+			}
+			
+			body {
+				color: var(--color-text);
+				background-color: var(--color-bg);
+				transition: background-color 0.3s ease, color 0.3s ease;
+				min-height: 100vh;
+				overflow-y: auto;
+				overflow-x: hidden;
+			}
+			
+			/* Scrollbar personalizada */
+			::-webkit-scrollbar {
+				width: 8px;
+				height: 8px;
+			}
+		
+			::-webkit-scrollbar-track {
+				background: transparent;
+			}
+		
+			::-webkit-scrollbar-thumb {
+				background: rgba(100, 116, 139, 0.5);
+				border-radius: 4px;
+			}
+		
+			.dark ::-webkit-scrollbar-thumb {
+				background: rgba(156, 163, 175, 0.5);
+			}
+		
+			::-webkit-scrollbar-thumb:hover {
+				background: rgba(100, 116, 139, 0.7);
+			}
+		
+			.dark ::-webkit-scrollbar-thumb:hover {
+				background: rgba(156, 163, 175, 0.7);
+			}
+			
+			@media (prefers-reduced-motion: reduce) {
+			  html {
+				scroll-behavior: auto;
+			  }
+			  
+			  * {
+				animation-duration: 0.01ms !important;
+				animation-iteration-count: 1 !important;
+				transition-duration: 0.01ms !important;
+				scroll-behavior: auto !important;
+			  }
+			}
+
+			/* Mejoras para visibilidad de secciones */
+			section {
+				display: block !important;
+				visibility: visible !important;
+				opacity: 1 !important;
+				min-height: 100px;
+			}
+		</style>
 	</head>
 	<body>
+		<Navbar />
+		<ThemeLanguageSelector />
+		<VercelFix />
+		<ClientScripts />
 		<slot />
+		<Footer />
 	</body>
 </html>
-
-<style is:global>
-	:root {
-		--font-size-base: clamp(1rem, 0.34vw + 0.91rem, 1.19rem);
-		--font-size-lg: clamp(1.2rem, 0.7vw + 1.2rem, 1.5rem);
-		--font-size-xl: clamp(2.44rem, 2.38vw + 1.85rem, 3.75rem);
-		--color-text: hsl(12, 5%, 4%);
-		--color-bg: hsl(0, 0%, 98%);
-		--color-border: hsl(0, 0%, 80%);
-	}
-
-	html {
-		font-family: -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-		font-size: var(--font-size-base);
-		color: var(--color-text);
-		background-color: var(--color-bg);
-		scroll-behavior: smooth;
-		-webkit-text-size-adjust: 100%;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-		-webkit-tap-highlight-color: transparent;
-		overflow-x: hidden;
-		width: 100%;
-		height: 100%;
-		overflow-y: auto;
-	}
-
-	html.dark {
-		--color-text: hsl(0, 0%, 98%);
-		--color-bg: hsl(215, 28%, 17%);
-		--color-border: hsl(215, 20%, 25%);
-		color-scheme: dark;
-	}
-
-	body {
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-		min-height: 100vh;
-		width: 100%;
-		overflow-x: hidden;
-		overflow-y: hidden; /* Eliminar scrollbar del body */
-		position: relative;
-	}
-
-	main {
-		position: relative;
-		width: 100%;
-		height: auto;
-		min-height: 100vh;
-		display: block;
-		overflow: visible;
-	}
-
-	section {
-		position: relative;
-		width: 100%;
-		height: auto;
-		display: block !important;
-		visibility: visible !important;
-		opacity: 1 !important;
-	}
-
-	/* Ajustar los colores de fondo para mayor contraste en modo oscuro */
-	.dark .bg-gray-50 {
-		background-color: hsl(215, 28%, 17%);
-	}
-
-	.dark .bg-gray-100 {
-		background-color: hsl(215, 28%, 17%);
-	}
-
-	.dark .bg-gray-900 {
-		background-color: hsl(215, 30%, 15%);
-	}
-
-	.dark .text-gray-800 {
-		color: hsl(0, 0%, 98%);
-	}
-
-	@supports (-webkit-touch-callout: none) {
-		body {
-			/* Mejorar scroll en iOS */
-			-webkit-overflow-scrolling: touch;
-		}
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		html {
-			scroll-behavior: auto;
-		}
-
-		*,
-		*::before,
-		*::after {
-			animation-duration: 0.01ms !important;
-			animation-iteration-count: 1 !important;
-			transition-duration: 0.01ms !important;
-			scroll-behavior: auto !important;
-		}
-	}
-
-	/* Arreglo específico para asegurar que todas las secciones sean visibles */
-	#about, #skills, #projects, #contact {
-		display: block !important;
-		visibility: visible !important;
-		opacity: 1 !important;
-		position: relative !important;
-		z-index: 1 !important;
-		height: auto !important;
-		min-height: auto !important;
-		width: 100% !important;
-		margin: 0 !important;
-		padding: 2rem 0 !important;
-	}
-
-	/* Eliminar posibles conflictos de posicionamiento */
-	.section-container {
-		position: relative !important;
-		transform: none !important;
-		display: block !important;
-		height: auto !important;
-		width: 100% !important;
-		margin: 0 !important;
-		padding: 1rem !important;
-		overflow: visible !important;
-	}
-	
-	/* Estilo personalizado para scrollbars - SOLO EN HTML */
-	html::-webkit-scrollbar {
-		width: 8px;
-	}
-	
-	html::-webkit-scrollbar-track {
-		background: #f3f4f6;
-	}
-	
-	html::-webkit-scrollbar-thumb {
-		background-color: #10b981;
-		border-radius: 4px;
-	}
-	
-	html.dark::-webkit-scrollbar-track {
-		background: #1f2937;
-	}
-	
-	html.dark::-webkit-scrollbar-thumb {
-		background-color: #059669;
-	}
-	
-	/* Configuración de scrollbar para Firefox */
-	html {
-		scrollbar-width: thin;
-		scrollbar-color: #10b981 #f3f4f6;
-	}
-	
-	html.dark {
-		scrollbar-color: #059669 #1f2937;
-	}
-	
-	/* Ocultar scrollbars adicionales en todos los componentes */
-	body, main, section, div, nav, aside, footer, header {
-		scrollbar-width: none;
-	}
-	
-	body::-webkit-scrollbar,
-	main::-webkit-scrollbar,
-	section::-webkit-scrollbar,
-	div::-webkit-scrollbar,
-	nav::-webkit-scrollbar,
-	aside::-webkit-scrollbar,
-	footer::-webkit-scrollbar,
-	header::-webkit-scrollbar {
-		display: none !important;
-		width: 0 !important;
-		height: 0 !important;
-	}
-	
-	/* Fix para contenedores fixed/absolute */
-	.fixed, .absolute {
-		overflow: visible !important;
-	}
-</style>
