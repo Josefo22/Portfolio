@@ -271,29 +271,39 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     }, 400);
     
-    // Typing effect animation
+    // Reemplazar completamente el efecto de typing por una solución más robusta
     const typingText = document.querySelector('.typing-effect');
     if (typingText) {
-      const text = typingText.textContent || '';
+      // Primero borrar cualquier contenido existente
       typingText.textContent = '';
-      let i = 0;
       
-      const typeWriter = () => {
-        if (i < text.length) {
-          typingText.textContent += text.charAt(i);
-          i++;
-          setTimeout(typeWriter, 70); // Adjust typing speed here
+      // Definir el texto correcto que queremos mostrar
+      const textToType = "¡Hola Mundo! Soy";
+      let charIndex = 0;
+      
+      // Crear una función recursiva para añadir un carácter a la vez
+      function typeNextChar() {
+        if (charIndex < textToType.length) {
+          // Agregar el siguiente caracter
+          typingText.textContent = textToType.substring(0, charIndex + 1);
+          charIndex++;
+          
+          // Programar el siguiente caracter
+          setTimeout(typeNextChar, 70);
         } else {
-          // When finished typing, blink cursor
-          typingText.style.borderRight = '2px solid transparent';
-          setTimeout(() => {
-            typingText.style.borderRight = '2px solid #10b981';
+          // Animación de parpadeo del cursor cuando se completa
+          setInterval(() => {
+            typingText.style.borderRightColor = 
+              (typingText.style.borderRightColor === 'transparent') 
+                ? '#10b981' 
+                : 'transparent';
           }, 700);
         }
-      };
+      }
       
-      typeWriter();
+      // Iniciar la animación de escritura
+      setTimeout(typeNextChar, 300);
     }
-  }, 300); // Short delay before starting animations
+  }, 300);
 });
 </script>
